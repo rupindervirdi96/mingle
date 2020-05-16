@@ -15,7 +15,9 @@ const jwt = require('jsonwebtoken');
 router.post('/', [
     check('name', 'Name is required.').not().isEmpty(),
     check('email', 'Email is required').isEmail(),
-    check('password', "Password should be more than 6 characters.").isLength({ min: 6 })
+    check('password', "Password should be more than 6 characters.").isLength({ min: 6 }),
+    check('birthdate', "Birthdate is required"),
+    check('gender', "Gender is required").not().isEmpty()
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -23,17 +25,15 @@ router.post('/', [
     }
 
     //See if user Exist
-    const { name, email, password } = req.body;
+    const { name, email, password, birthdate, gender } = req.body;
 
     try {
-        const Unique = await User.findOne({ email });
-
-
-        if (Unique) {
-            res.status(400).json({ error: [{ msg: "User already exists" }] });
+        const userExists = await User.findOne({ email });
+        if (userExists) {
+            return res.status(400).json({ error: [{ msg: "User already exists" }] });
         }
 
-        const user = new User({ name, email, password });
+        const user = new User({ name, email, password, birthdate, gender });
 
         const salt = await bcrypt.genSalt(10);
 
@@ -52,14 +52,10 @@ router.post('/', [
             { expiresIn: 360000 },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                return res.json({ token });
             });
-        // res.send("User registered");
-
     } catch (error) {
-        console.log(error.message);
-        res.status(500).send("Server Error");
-
+        return res.status(400).json({ errors: error.message });
     }
 
 
