@@ -1,0 +1,108 @@
+.profile-container {
+  box-sizing: border-box;
+  position: absolute;
+  top: 59px;
+  width: 100%;
+  background-color: #eee;
+
+  .top-section {
+    width: 100%;
+    background: linear-gradient(rgba(0, 54, 61, 0.3), #fff);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .top-section-content {
+    max-width: 750px;
+    margin: auto;
+    hr {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .cover {
+      height: 275px;
+      width: 100%;
+      margin: auto;
+      background-image: url(../../assets/temp-default-img.png);
+      background-size: cover;
+      background-position: center;
+      border-radius: 0px 0px 10px 10px;
+      position: relative;
+
+      .profile-photo {
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, -80%);
+        height: 145px;
+        width: 145px;
+        border: 5px solid white;
+        background-image: url(../../assets/temp-default-img2.png);
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+      }
+    }
+
+    .userDescription {
+      text-align: center;
+      padding: 25px 0px 10px 0px;
+
+      h5 {
+        text-transform: uppercase;
+        font-family: Montserrat;
+        padding: 5px 8px;
+      }
+
+      h1 {
+        font-family: Montserrat;
+      }
+    }
+
+    .tabs {
+      display: flex;
+      padding: 10px 0px;
+      div {
+        flex: 1;
+      }
+      ul {
+        display: flex;
+        li {
+          flex: 1;
+          background-color: #eee;
+          border-radius: 5px;
+          padding: 8px 10px;
+          margin-right: 9px;
+          border: 2px solid #00000000;
+          font-weight: 400;
+          font-family: "Baloo Bhai 2";
+        }
+        li:hover {
+          background-color: #eee;
+          color: rgb(24, 119, 242);
+          border-bottom: 2px solid #1877f2;
+        }
+      }
+    }
+  }
+  .main-section {
+    width: 100%;
+    .main-section-content {
+      display: grid;
+      max-width: 750px;
+      grid-template-columns: max-content 1fr;
+      grid-column-gap: 10px;
+      margin: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main-section-content {
+    display: grid;
+    max-width: 750px;
+    grid-template-rows: max-content 1fr;
+    grid-column-gap: 10px;
+    margin: auto;
+  }
+}

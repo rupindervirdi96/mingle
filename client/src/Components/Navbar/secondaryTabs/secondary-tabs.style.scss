@@ -1,0 +1,61 @@
+.Secondary-Tabs {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: end;
+
+
+
+
+
+
+
+  ul {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+
+    li {
+      display: flex;
+      background-color: #eee;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      margin: 5px;
+
+      img {
+        margin: auto;
+      }
+    }
+  }
+}
+
+a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #222;
+}
+
+.user-profile:hover {
+  background-color: #eee;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0px 10px;
+  border-radius: 5px;
+
+  img {
+    border-radius: 50%;
+    border: 1px solid #eee;
+  }
+
+  span {
+    font-size: 20px;
+    width: max-content;
+    padding: 0px 5px;
+  }
+}

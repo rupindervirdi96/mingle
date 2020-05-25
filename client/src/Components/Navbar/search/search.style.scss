@@ -1,0 +1,21 @@
+.search-container {
+  display: flex;
+  align-items: center;
+
+  .search-textBox {
+    display: flex;
+    align-items: center;
+    background-color: #eee;
+    padding: 6px 10px;
+    border-radius: 30px;
+    margin: 10px 0px;
+
+    input {
+      border: none;
+      background-color: #eee;
+      padding: 2px 10px;
+      font-size: 14px;
+      outline: none;
+    }
+  }
+}

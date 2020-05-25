@@ -1,0 +1,19 @@
+.homePage-container {
+  background: #eee;
+  position: relative;
+  top: 59px;
+  width: 100%;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 600px 1fr;
+
+  .menu {
+  }
+
+  .feed-container {
+    margin: 0px 20px;
+  }
+
+  .contacts {
+  }
+}

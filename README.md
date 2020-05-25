@@ -10,6 +10,20 @@ Middleware is being used to protect the data from being used without a successfu
 
 ### --register
 
+## profile
+
+### --profile/create
+
+### --profile/viewMe
+
+### --profile/viewFriend
+
+### --profile/changeStatus
+
+### --profile/
+
+### --profile/
+
 ## post
 
 ### --create-post

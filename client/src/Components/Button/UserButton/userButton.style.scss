@@ -1,0 +1,32 @@
+.userBtn {
+  button {
+    padding: 5px 10px;
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin: 5px 0px;
+    border: none;
+    background-color: #eee;
+    img {
+      border-radius: 50%;
+    }
+    span {
+      flex: 1;
+      text-align: left;
+      padding-left: 10px;
+      text-transform: capitalize;
+      font-family: "Baloo Bhai 2";
+    }
+    .status {
+      height: 8px;
+      width: 8px;
+      background-color: green;
+      border-radius: 50%;
+    }
+  }
+  button:hover {
+    background-color: #fff;
+  }
+}

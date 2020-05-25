@@ -2,16 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator')
 const User = require('../models/user.model');
+const Profile = require('../models/profile.model');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
 //route   users/
-//desc    testRoute
+//desc    register
 //access  public
-
-// router.get('/', (req, res) => { res.send("User route") })
-
 router.post('/', [
     check('name', 'Name is required.').not().isEmpty(),
     check('email', 'Email is required').isEmail(),
@@ -23,17 +21,17 @@ router.post('/', [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    console.log("helllloooo");
 
     //See if user Exist
     const { name, email, password, birthdate, gender } = req.body;
-
     try {
         const userExists = await User.findOne({ email });
         if (userExists) {
             return res.status(400).json({ error: [{ msg: "User already exists" }] });
         }
 
-        const user = new User({ name, email, password, birthdate, gender });
+        const user = new User({ email, password });
 
         const salt = await bcrypt.genSalt(10);
 
@@ -47,6 +45,9 @@ router.post('/', [
                 id: user.id
             }
         }
+        const profile = new Profile({ name: name, user: user.id, birthdate: birthdate, gender: gender });
+        await profile.save();
+        // res.json(profile);
 
         jwt.sign(payload, config.get('jwtSecret'),
             { expiresIn: 360000 },

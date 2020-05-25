@@ -1,0 +1,106 @@
+.create-post {
+  font-family: "Baloo Bhai 2";
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 100%;
+  margin: 15px 0px 15px 0px;
+  box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.4);
+
+  .textPost {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+
+    .postText {
+      padding: 10px;
+      box-sizing: border-box;
+      color: #aaa;
+      font-size: 16px;
+      text-align: left; 
+      border-radius: 35px;
+      padding: 20px;
+      word-break: break-all;
+      background-color: #eee;
+      width: 100%;
+      padding-bottom: 0;
+
+      textarea {
+
+        outline: none;
+        width: 100%;
+        min-height: 40px;
+        border: 0;
+        background: rgba(0, 0, 0, 0);
+        resize: none;
+      }
+    }
+
+    img {
+      height: 40px;
+      background-color: #eee;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+
+  hr {
+    background-color: rgba(#000000, 0.5);
+    border: none;
+    height: 1px;
+    opacity: 0.5;
+    width: 95%;
+    margin: auto;
+  }
+
+  .attachments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 0px 10px;
+      width: 90%;
+      margin: auto;
+      justify-content: center;
+
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+
+        img {
+          margin: 0px 3px 0px 0px;
+        }
+      }
+
+      li:hover {
+        background-color: #eee;
+      }
+    }
+
+    form {
+      width: 100%;
+
+      .post-btn {
+        width: 100%;
+        padding: 5px 0px;
+        background-color: #0077ff;
+        border-radius: 0px 0px 10px 10px;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 16px;
+        font-family: "Baloo Bhai 2";
+      }
+    }
+  }
+}
