@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./chatBtn.style.scss";
 import message from "../../../assets/message1.png";
 

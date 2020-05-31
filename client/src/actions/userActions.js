@@ -1,25 +1,15 @@
-import { FETCH_USER, NEW_USER, SET_USER } from "./types";
+import { SET_FRIEND, SET_USER } from "./types";
 import axios from "axios";
 
 
-// export const fetchUser = () => dispatch => {
-//     axios.get("http://localhost:5000/user/login")
-//         .then(response => response.data)
-//         .then(users => dispatch({
-//             type: FETCH_USER,
-//             data: users
-//         }))
-//         .catch(error => console.log("Error: " + error))
-// }
+
 export const loginUser = (loginInfo) => async dispatch => {
     // 
     try {
-        localStorage.clear();
-
+        localStorage.removeItem('auth');
         const res = await axios.post("http://localhost:5000/auth/", loginInfo)
         localStorage.setItem('auth', JSON.stringify(res.data.token));
-
-        window.location = "/profile";
+        window.location = "/home";
     } catch (error) {
         console.log("Errorr" + error.message);
     }
@@ -46,21 +36,36 @@ export const register = (user) => async dispatch => {
     }
 }
 
-export const setUser = (auth) => async dispatch => {
+export const setUser = auth => async dispatch => {
     try {
 
         axios.defaults.headers.common['x-auth-token'] = auth;
-        const res2 = await axios.get('http://localhost:5000/auth/')
-        console.log(res2.data);
+        const res = await axios.get('http://localhost:5000/auth/')
         dispatch(
             {
                 type: SET_USER,
-                data: res2.data,
+                data: res.data,
             }
         )
         delete axios.defaults.headers.common['x-auth-token'];
     } catch (error) {
         console.log(error);
 
+    }
+}
+export const getProfile = (id) => async dispatch => {
+    try {
+        axios.defaults.headers.common['x-auth-token'] = JSON.parse(localStorage.getItem('auth'));
+        const res = await axios.get(`http://localhost:5000/profile/${id}`);
+        console.log(res.data);
+        dispatch(
+            {
+                type: SET_FRIEND,
+                data: res.data,
+            }
+        )
+        delete axios.defaults.headers.common['x-auth-token'];
+    } catch (error) {
+        console.log(error);
     }
 }

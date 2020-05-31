@@ -4,20 +4,19 @@ import add from "../../../assets/more.png";
 import more from "../../../assets/bottom arrow.png";
 import { Link } from "react-router-dom";
 
-const SecondaryTabs = ({ name, profilePic }) => {
+const SecondaryTabs = ({ name }) => {
   return (
     <div className="Secondary-Tabs">
       <Link to="/profile">
         <div className="user-profile">
-          <img src={profilePic} height="40px" alt="" />
-          <span className="user-name">{name}</span>
+          <span className="user-name">Welcome, {name}</span>
         </div>
       </Link>
       <ul type="none">
-        <li className="create">
+        {/* <li className="create">
           <img src={add} height="20px" alt="" />
           <div className="create-menu"></div>
-        </li>
+        </li> */}
         <li className="more-options">
           <img src={more} height="20px" alt="" />
           <div className="more-options-menu"></div>

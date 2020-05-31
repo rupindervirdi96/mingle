@@ -47,7 +47,6 @@ router.post('/', [
         }
         const profile = new Profile({ name: name, user: user.id, birthdate: birthdate, gender: gender });
         await profile.save();
-        // res.json(profile);
 
         jwt.sign(payload, config.get('jwtSecret'),
             { expiresIn: 360000 },

@@ -1,8 +1,9 @@
-import { FETCH_USER, SET_USER } from "../actions/types";
+import { SET_USER, SET_FRIEND } from "../actions/types";
 
 
 const initialState = {
-    profile: {}
+    profile: {},
+    friendsProfile: {}
 }
 
 export default function (state = initialState, action) {
@@ -11,7 +12,10 @@ export default function (state = initialState, action) {
             return {
                 ...state, profile: action.data
             }
-
+        case SET_FRIEND:
+            return {
+                ...state, friendsProfile: action.data
+            }
         default:
             return state;
     }

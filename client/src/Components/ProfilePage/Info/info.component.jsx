@@ -3,7 +3,7 @@ import profile from "../../../assets/profile.png";
 import "./info.style.scss";
 import Button from "../../Button/button.component";
 
-const info = () => {
+const info = ({ myInfo, friendInfo }) => {
   return (
     <div className="info-container">
       <h2>Intro</h2>

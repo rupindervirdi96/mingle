@@ -1,37 +1,45 @@
 import React from "react";
 import "./main-tabs.style.scss";
-import bell from "../../../assets/bell.png";
-import home from "../../../assets/home.png";
-import messenger from "../../../assets/messenger.png";
 import { Link } from "react-router-dom";
+import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
+import { ReactComponent as FriendsIcon } from "../../../svg/friends.svg";
+import profilePic from "../../../assets/profile.png";
+// import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
+// import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
+// import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
 
-const MainTabs = ({ name }) => {
+const MainTabs = () => {
   return (
     <div className="main-tabs-container">
       <ul type="none">
         <Link to="/home">
           <li>
-            <img height="35px" src={home} alt="" />
+            <HomeIcon />
           </li>
         </Link>
-        <Link to="/home">
-          <li onClick={name}>
-            <img height="35px" src={bell} alt="" />
+        <Link to="/friends">
+          <li>
+            <FriendsIcon fill="#000000" />
+          </li>
+        </Link>
+        <Link to="/profile">
+          <li>
+            <img
+              style={{ borderRadius: "50%" }}
+              src={profilePic}
+              height="40px"
+              alt=""
+            />
           </li>
         </Link>
         <Link to="/home">
           <li>
-            <img height="35px" src={messenger} alt="" />
+            <HomeIcon />
           </li>
         </Link>
         <Link to="/home">
           <li>
-            <img height="35px" src={messenger} alt="" />
-          </li>
-        </Link>
-        <Link to="/home">
-          <li>
-            <img height="35px" src={messenger} alt="" />
+            <HomeIcon />
           </li>
         </Link>
       </ul>

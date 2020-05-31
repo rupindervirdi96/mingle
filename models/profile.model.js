@@ -10,7 +10,12 @@ const ProfileSchema = new mongoose.Schema({
         required: true
     },
     profilePic: {
-        type: String
+        type: String,
+        default: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    },
+    coverPic: {
+        type: String,
+        default: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
     },
     status: {
         type: String,
@@ -25,12 +30,6 @@ const ProfileSchema = new mongoose.Schema({
         required: true
     },
     friends: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    }],
-    messages: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'message'
     }],
     education: [
         {

@@ -13,14 +13,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border-bottom: 3px solid #fff;
     }
+
     a {
       border-bottom: 0px solid #fff;
+    }
+
+    li:active {
+      border-bottom: 3px solid rgb(0, 119, 255);
     }
 
     li:hover {
       border-bottom: 3px solid rgb(0, 119, 255);
       background-color: #eee;
     }
+
   }
 }

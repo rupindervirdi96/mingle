@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./login.style.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { loginUser, setUser } from "../../../actions/userActions";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../actions/userActions";
 
 const Login = () => {
   const [currentInfo, changeCurrentInfo] = useState({

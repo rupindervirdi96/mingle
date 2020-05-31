@@ -5,15 +5,13 @@
   width: 100%;
   display: grid;
   text-align: center;
-  grid-template-columns: 1fr 600px 1fr;
+  grid-template-columns: 1fr 500px 1fr;
 
-  .menu {
-  }
+  .menu {}
 
   .feed-container {
-    margin: 0px 20px;
+    margin: 0px 0px;
   }
 
-  .contacts {
-  }
+  .contacts {}
 }

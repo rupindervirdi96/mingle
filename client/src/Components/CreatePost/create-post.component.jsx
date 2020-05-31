@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import "./create-post.style.scss";
 import feeling from "../../assets/feeling.png";
 import tag from "../../assets/tag.png";
-import profile from "../../assets/profile.png";
-import Axios from "axios";
-import { addPost } from "../../actions/postAction";
-import { useSelector, useDispatch } from "react-redux";
+import profilePic from "../../assets/profile.png";
+import { useSelector } from "react-redux";
 
-const CreatePost = ({ name }) => {
-  const { CurrentUserName } = useSelector((state) => ({}));
-
-  const dispatch = useDispatch();
+const CreatePost = () => {
+  const { profile } = useSelector((state) => ({
+    profile: state.users.profile,
+  }));
 
   const OnClickMessageBox = () => {
     if (
       document.querySelector(".post-text-message").innerText ===
-      `Whats on your mind ${name}?`
+      `What's on your mind, ${profile.name}?`
     ) {
       document.querySelector(".post-text-message").innerText = "";
     }
   };
-
-  const [text, setText] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,27 +29,24 @@ const CreatePost = ({ name }) => {
     //   comments: ["Comment1", "Comment2"],
     // };
 
-    dispatch(addPost({ text }));
-    setText("");
+    // dispatch(addPost({ text }));
+    // setText("");
   };
 
   return (
     <div className="create-post">
-      <form action="" onSubmit={onSubmit}>
+      <form className="create-post-form" action="" onSubmit={onSubmit}>
         <div className="textPost">
-          <img src={profile} alt="" />
+          <img src={profilePic} alt="" />
           <div className="postText">
-            <textarea
-              placeholder="Whats on your mind?"
+            <div
               className="post-text-message"
-              // contentEditable="true"
-              onChange={(e) => setText(e.target.value)}
-              value={text}
-              // onClick={OnClickMessageBox}
+              contentEditable
               suppressContentEditableWarning={true}
+              onClick={OnClickMessageBox}
             >
-              Whats on your mind {name}?
-            </textarea>
+              What's on your mind, {profile.name}?
+            </div>
           </div>
         </div>
         <hr />
@@ -74,10 +67,10 @@ const CreatePost = ({ name }) => {
               <img src={feeling} height="20px" alt="" /> Feeling
             </li>
           </ul>
-          <button type="submit" className="post-btn">
-            POST
-          </button>
         </div>
+        <button type="submit" className="post-btn">
+          POST
+        </button>
       </form>
     </div>
   );
