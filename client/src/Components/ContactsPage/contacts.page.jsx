@@ -16,8 +16,8 @@ const ContactsPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getSuggestions());
     dispatch(setUser(JSON.parse(localStorage.getItem("auth"))));
+    dispatch(getSuggestions());
   }, [dispatch]);
 
   return (
@@ -25,27 +25,32 @@ const ContactsPage = () => {
       <div className="contacts">
         <h1 style={{ paddingLeft: "8px" }}>Friends</h1>
         <h3 style={{ paddingLeft: "8px" }}>Requests</h3>
-        {profile.friends.map((contact, key) => {
-          if (contact.status === "received") {
-            return (
-              <Contacts
-                openProfile={(id) => {
-                  console.log(friendsProfile);
-                  dispatch(getProfile(id));
-                }}
-                contact={contact}
-                key={key}
-                status="received"
-              />
-            );
-          }
-        })}
+        {
+          // console.log(profile.contacts.requests.length)
+          profile.contacts.requests.length > 0 ? (
+            profile.contacts.requests.map((contact, key) => {
+              if (contact.status === "received") {
+                return (
+                  <Contacts
+                    openProfile={(id) => {
+                      dispatch(getProfile(id));
+                    }}
+                    contact={contact}
+                    key={key}
+                    status="received"
+                  />
+                );
+              }
+            })
+          ) : (
+            <span style={{ paddingLeft: "8px" }}>No new requests for you.</span>
+          )
+        }
         <h3 style={{ paddingLeft: "8px" }}>Suggestions</h3>
         {suggestions.map((contact, key) => {
           return (
             <Contacts
               openProfile={(id) => {
-                console.log(friendsProfile);
                 dispatch(getProfile(id));
               }}
               contact={contact}

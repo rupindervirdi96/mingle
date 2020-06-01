@@ -1,14 +1,33 @@
 import React from "react";
 import profilePic from "../../../assets/profile.png";
 import "./contacts.style.scss";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Contacts = ({ status, contact, openProfile }) => {
   const acceptRequest = () => {
-    console.log("Accepted");
+    axios.defaults.headers.common["x-auth-token"] = JSON.parse(
+      localStorage.getItem("auth")
+    );
+    const res = axios.put(
+      `http://localhost:5000/profile/update/friends/accept/${contact.id}`
+    );
+    console.log(res);
+    window.location = "/friends";
+
+    delete axios.defaults.headers.common["x-auth-token"];
   };
 
   const sendRequest = () => {
-    console.log(contact._id);
+    axios.defaults.headers.common["x-auth-token"] = JSON.parse(
+      localStorage.getItem("auth")
+    );
+
+    const res = axios.put(
+      `http://localhost:5000/profile/update/friends/request/${contact._id}`
+    );
+    window.location = "/friends";
+    delete axios.defaults.headers.common["x-auth-token"];
   };
 
   const deleteRequest = () => {
@@ -47,5 +66,4 @@ const Contacts = ({ status, contact, openProfile }) => {
     </div>
   );
 };
-
 export default Contacts;

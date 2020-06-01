@@ -58,6 +58,27 @@ router.get('/', auth, async (req, res) => {
 })
 
 
+//route   posts/
+//desc    getAllPostsForFriends
+//access  public
+router.get('/', auth, async (req, res) => {
+
+
+
+    const profile = await Profile.findOne({ user: req.user.id });
+    friendsIds = [];
+    profile.friends.filter((friend) => {
+        if (friend.status == "friend") {
+            friendsIds.push(friend.id);
+        }
+    })
+
+    // res.json(posts);
+    console.log("post created");
+
+})
+
+
 
 
 

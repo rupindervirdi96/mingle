@@ -29,8 +29,12 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    friends: [{
-    }],
+    contacts: {
+        friends: [{
+        }],
+        requests: [{
+        }]
+    },
     education: [
         {
             degree: { type: String },

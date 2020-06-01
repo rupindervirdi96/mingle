@@ -57,7 +57,7 @@ export const getProfile = (id) => async dispatch => {
     try {
         axios.defaults.headers.common['x-auth-token'] = JSON.parse(localStorage.getItem('auth'));
         const res = await axios.get(`http://localhost:5000/profile/${id}`);
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(
             {
                 type: SET_FRIEND,
