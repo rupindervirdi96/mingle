@@ -1,18 +1,12 @@
 import React, { useEffect } from "react";
 import "./homePage.style.scss";
 import Feed from "./feed/feed.component";
-import Contacts from "./contacts/contacts.component";
+import Contacts from "./contacts/contactList.component";
 import Menu from "./menu/menu.component";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../actions/userActions";
 
-function HomePage(props) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setUser(JSON.parse(localStorage.getItem("auth"))));
-  }, []);
-
+function HomePage({ profile }) {
   return (
     <div className="homePage-container">
       <Menu />

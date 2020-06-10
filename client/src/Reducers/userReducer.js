@@ -1,4 +1,4 @@
-import { SET_USER, SET_FRIEND } from "../actions/types";
+import { SET_USER, SET_FRIEND, SET_STATUS } from "../actions/types";
 
 
 const initialState = {
@@ -7,14 +7,21 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-    switch (action.type) {
+    const { type, data } = action;
+    switch (type) {
         case SET_USER:
             return {
-                ...state, profile: action.data
+                ...state, profile: data
             }
         case SET_FRIEND:
             return {
-                ...state, friendsProfile: action.data
+                ...state, friendsProfile: data
+            }
+        case SET_STATUS:
+            const profileEdited = { ...state };
+            profileEdited.status = data
+            return {
+                ...state, profile: profileEdited
             }
         default:
             return state;

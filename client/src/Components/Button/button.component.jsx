@@ -1,13 +1,12 @@
 import React from "react";
 
-const Button = ({ name }) => {
+const Button = ({ name, click }) => {
   const clickHandler = () => {
     switch (name) {
-      case "value":
-
+      case "Edit Details":
+        click();
         break;
       default:
-          
         break;
     }
   };

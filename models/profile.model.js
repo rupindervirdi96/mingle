@@ -35,15 +35,7 @@ const ProfileSchema = new mongoose.Schema({
         requests: [{
         }]
     },
-    education: [
-        {
-            degree: { type: String },
-            institute: { type: String },
-            location: { type: String },
-            from: { type: Number },
-            to: { type: Number },
-        }
-    ]
+    info: [{ type: Object }]
 })
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

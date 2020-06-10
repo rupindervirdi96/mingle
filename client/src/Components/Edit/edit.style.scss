@@ -1,0 +1,182 @@
+.EditContainer {
+    height: calc(100vh - 59px);
+    width: 100%;
+    // background-color: rgba($color: #000000, $alpha: 0.6);
+    position: fixed;
+    top: 59px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: rgba($color: #000000, $alpha: 0.6);
+
+    .screen {
+        height: calc(100vh);
+        width: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        position: fixed;
+        top: 59px;
+
+    }
+
+    .editStatus,
+    .editProfilePhoto {
+        width: 50%;
+        max-width: 400px;
+        min-width: 300px;
+        z-index: 3;
+        background-color: #ddd;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        border: 2px solid rgb(0, 0, 0);
+        // box-shadow: ;
+
+        h2 {
+            text-align: center;
+            margin: 10px;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: auto;
+            padding: 8px 10px;
+            border-radius: 120px;
+            border: none;
+            font-weight: bold;
+            margin: 5px 10px 15px 10px;
+            outline: none;
+        }
+
+        .btnUpdate {
+            width: 100%;
+            padding: 5px 0px;
+            background-color: #0077ff;
+            border-radius: 0px 0px 8px 8px;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 16px;
+            font-family: "Baloo Bhai 2";
+        }
+    }
+
+    .editStatus * {
+        font-family: 'Montserrat';
+
+    }
+
+    .editInfo {
+        width: 60%;
+        max-width: 700px;
+        position: relative;
+        min-width: 300px;
+        max-height: 600px;
+        overflow-y: scroll;
+        z-index: 3;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        border: 2px solid rgb(0, 0, 0);
+
+        .btnUpdate {
+            width: 100%;
+            padding: 5px 0px;
+            background-color: #0077ff;
+            border-radius: 0px 0px 5px 5px;
+            border: none;
+            margin: 0;
+            margin-top: 15px;
+            outline: none;
+            color: white;
+            font-size: 16px;
+            font-family: "Baloo Bhai 2";
+        }
+
+        h1 {
+            border-bottom: 1px solid black;
+
+        }
+
+        img {
+            background-color: #0077ff;
+            border-radius: 50%;
+            height: 30px;
+        }
+
+        .work-info {
+            // margin-left: 0;
+
+            .work-module {
+                margin-left: 0;
+
+                form {
+                    margin-left: 0;
+                    display: flex;
+                    flex-direction: column;
+
+                }
+            }
+        }
+
+
+    }
+
+    .school-info {
+        .education-module {
+            margin-left: 0;
+
+            form {
+                margin-left: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+        }
+    }
+
+    .location-info {
+        form {
+            margin-left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .location-info {
+        form {
+            margin-left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .relationship-info {
+        form {
+            margin-left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.btnAdd {
+    width: 75px;
+    background-color: #0077ff;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 5px;
+}
+
+.editInfo * {
+    margin: 0px 20px;
+
+}
+
+.editInfo h4 {
+    margin: 20px;
+    font-family: 'Montserrat';
+}

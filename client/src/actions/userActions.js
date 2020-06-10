@@ -1,4 +1,4 @@
-import { SET_FRIEND, SET_USER } from "./types";
+import { SET_FRIEND, SET_USER, SET_STATUS } from "./types";
 import axios from "axios";
 
 
@@ -6,9 +6,8 @@ import axios from "axios";
 export const loginUser = (loginInfo) => async dispatch => {
     // 
     try {
-        localStorage.removeItem('auth');
         const res = await axios.post("http://localhost:5000/auth/", loginInfo)
-        localStorage.setItem('auth', JSON.stringify(res.data.token));
+        sessionStorage.setItem('auth', JSON.stringify(res.data.token));
         window.location = "/home";
     } catch (error) {
         console.log("Errorr" + error.message);
@@ -55,9 +54,8 @@ export const setUser = auth => async dispatch => {
 }
 export const getProfile = (id) => async dispatch => {
     try {
-        axios.defaults.headers.common['x-auth-token'] = JSON.parse(localStorage.getItem('auth'));
+        axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
         const res = await axios.get(`http://localhost:5000/profile/${id}`);
-        // console.log(res.data);
         dispatch(
             {
                 type: SET_FRIEND,
@@ -68,4 +66,29 @@ export const getProfile = (id) => async dispatch => {
     } catch (error) {
         console.log(error);
     }
+}
+
+export const changeStatus = (newStat) => async dispatch => {
+    axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
+    console.log("HEllo");
+    const res = await axios.put("http://localhost:5000/profile/update/status", { status: newStat });
+    console.log(res);
+
+    dispatch(
+        {
+            type: SET_STATUS,
+            data: res.data,
+        }
+    )
+    delete axios.defaults.headers.common['x-auth-token'];
+}
+
+export const removeFriendsProfile = () => dispatch => {
+    const obj = {}
+    dispatch(
+        {
+            type: SET_FRIEND,
+            data: obj,
+        }
+    )
 }

@@ -14,7 +14,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUser(JSON.parse(localStorage.getItem("auth"))));
+    dispatch(setUser(JSON.parse(sessionStorage.getItem("auth"))));
   }, [dispatch]);
 
   return (

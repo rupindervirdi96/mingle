@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 
-const MessageSchema = new mongoose.Schema({
-    sender: { type: mongoose.Schema.Types.ObjectId, ref: 'profile' },
-    receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'profile' },
+const message = new mongoose.Schema({
+
+    sender: { type: String },
+    receiver: { type: String },
     text: {
         type: String,
         required: true
@@ -12,6 +13,7 @@ const MessageSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+}
+)
 
-module.exports = Message = mongoose.model('message', MessageSchema)
+module.exports = Message = mongoose.model('message', message)

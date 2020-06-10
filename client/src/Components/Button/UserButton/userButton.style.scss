@@ -2,16 +2,18 @@
   button {
     padding: 5px 10px;
     display: flex;
-    width: 200px;
+    width: 100%;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     margin: 5px 0px;
     border: none;
     background-color: #eee;
+
     img {
       border-radius: 50%;
     }
+
     span {
       flex: 1;
       text-align: left;
@@ -19,6 +21,7 @@
       text-transform: capitalize;
       font-family: "Baloo Bhai 2";
     }
+
     .status {
       height: 8px;
       width: 8px;
@@ -26,6 +29,7 @@
       border-radius: 50%;
     }
   }
+
   button:hover {
     background-color: #fff;
   }

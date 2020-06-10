@@ -1,20 +1,24 @@
 .chat-section {
   display: grid;
-  width: 100%;
+  width: auto;
   position: fixed;
   top: 100%;
-  transform: translateY(-100%);
+  left: 100%;
+  transform: translate(-100%, -100%);
   grid-template-columns: 1fr max-content;
+
   .friends {
     display: flex;
     flex-direction: column;
     justify-content: right;
+
     .friend-list-container {
       border: 2px solid rgb(255, 255, 255);
       border-radius: 5px;
       padding: 2px;
     }
   }
+
   .chatButton {
     display: flex;
     justify-content: flex-end;

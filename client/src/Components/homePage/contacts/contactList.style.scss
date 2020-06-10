@@ -1,0 +1,19 @@
+.contactss {
+    position: fixed;
+    left: 100%;
+    transform: translateX(-100%);
+    display: flex;
+    justify-content: flex-end;
+
+    .lists {
+        width: 225px;
+        background-color: #eee;
+        box-shadow: -1px 0px 4px 0px rgba($color: #000000, $alpha: 0.1);
+
+        h1 {
+            text-align: left;
+
+            padding-left: 9px;
+        }
+    }
+}

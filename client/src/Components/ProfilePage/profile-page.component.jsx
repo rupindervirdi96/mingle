@@ -1,41 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile-page.style.scss";
 import CreatePost from "../../Components/CreatePost/create-post.component";
 import Post from "../Post/post.component";
 import Info from "./Info/info.component";
 import postImage from "../../assets/profile.png";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../../actions/userActions";
+import edit from "../../assets/edit.png";
+import Edit from "../Edit/edit.component";
 
-const ProfilePage = ({ friendsProfile }) => {
-  const { profile } = useSelector((state) => ({
-    profile: state.users.profile,
+const ProfilePage = ({ friendsProfile, profile }) => {
+  const { posts, AnyUser } = useSelector((state) => ({
+    posts: state.posts.MyPosts,
+    AnyUser: state.posts.UserPosts,
   }));
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setUser(JSON.parse(localStorage.getItem("auth"))));
-  }, [dispatch]);
+  const [click, setClick] = useState(false);
+  const [click2, setClick2] = useState(false);
+  const [click3, setClick3] = useState(false);
+  const [click4, setClick4] = useState(false);
 
   return (
     <div className="profile-container">
+      {click ? (
+        <Edit
+          type="status"
+          onChange={(val) => {
+            setClick(val);
+          }}
+        />
+      ) : click2 ? (
+        <Edit
+          type="info"
+          onChange={(val) => {
+            setClick2(val);
+          }}
+        />
+      ) : click3 ? (
+        <Edit
+          type="profilePic"
+          onChange={(val) => {
+            setClick3(val);
+          }}
+        />
+      ) : click4 ? (
+        <Edit
+          type="coverPic"
+          onChange={(val) => {
+            setClick4(val);
+          }}
+        />
+      ) : (
+        ""
+      )}
       <div className="top-section">
         <div className="top-section-content">
           <div
             style={{ backgroundImage: "url(" + profile.coverPic + ")" }}
             className="cover"
           >
+            <img
+              src={edit}
+              onClick={() => {
+                setClick4(true);
+              }}
+              alt=""
+            />
             <div
               style={{ backgroundImage: "url(" + profile.profilePic + ")" }}
               className="profile-photo"
-            ></div>
+            >
+              <img
+                src={edit}
+                onClick={() => {
+                  setClick3(true);
+                }}
+                alt=""
+              />
+            </div>
           </div>
           <div className="userDescription">
             {friendsProfile == null ? (
               <div className="userDescription">
                 <h1>{profile.name}</h1>
-                <h5>{profile.status}</h5>
+                <div>
+                  {profile.status}{" "}
+                  <img
+                    className="edit-status"
+                    height="15px"
+                    src={edit}
+                    alt=""
+                    onClick={() => {
+                      setClick(true);
+                    }}
+                  />{" "}
+                </div>
               </div>
             ) : (
               <div className="userDescription">
@@ -47,39 +104,36 @@ const ProfilePage = ({ friendsProfile }) => {
           <hr />
           <div className="tabs">
             <ul type="none">
-              <li>Timeline</li>
               <li>About</li>
               <li>Friends</li>
               <li>Photos</li>
+              <li>Timeline</li>
             </ul>
-            <div></div>
+            {/* <div></div>
             <ul type="none">
               <li>Edit Profile</li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>
       <div className="main-section">
         <div className="main-section-content">
           <div className="left">
-            <Info myInfo={profile} friendInfo={friendsProfile} />
+            <Info
+              click={() => {
+                setClick2(true);
+              }}
+            />
           </div>
           <div className="right">
-            <CreatePost />
-            <Post
-              creator={profile.name}
-              img={postImage}
-              nbLikes="5"
-              nbComments="3"
-              text="This is the post in my profile"
-            />
-            <Post
-              creator={profile.name}
-              img={postImage}
-              nbLikes="5"
-              nbComments="3"
-              text="This is the post in my profile"
-            />
+            {friendsProfile == null ? <CreatePost profile={profile} /> : ""}
+            {friendsProfile == null
+              ? posts.map((post, key) => {
+                  return <Post post={post} key={key} />;
+                })
+              : AnyUser.map((post, key) => {
+                  return <Post post={post} key={key} />;
+                })}
           </div>
         </div>
       </div>

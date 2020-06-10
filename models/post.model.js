@@ -3,16 +3,19 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema(
     {
         profile: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'profile'
+            type: String,
+            required: true
         },
         name: {
             type: String,
             required: true
         },
+        profPic: {
+            type: String,
+            required: true
+        },
         image: {
             type: String,
-            default: "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
         },
         text: {
             type: String,
@@ -21,8 +24,7 @@ const postSchema = new Schema(
         },
         likes: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'profile'
+                type: Object
             }
         ],
         comments: [

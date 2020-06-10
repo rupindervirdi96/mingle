@@ -5,31 +5,20 @@ import Post from "../../Post/post.component";
 import tempPostImg from "../../../assets/temp-default-img.png";
 import tempPostImg2 from "../../../assets/temp-default-img2.png";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPosts } from "../../../actions/postAction";
+import { getMyPosts } from "../../../actions/postAction";
 
 const Feed = () => {
-  const { posts, user } = useSelector((state) => ({
-    posts: state.posts.posts,
-    user: state.users.currentUser,
+  const { profile, posts } = useSelector((state) => ({
+    profile: state.users.profile,
+    posts: state.posts.FriendsPost,
   }));
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, []);
 
   return (
     <div className="feed-container">
-      <CreatePost name={"Rupinder"} />
-      {posts.map((post, key) => (
-        <Post
-          key={key}
-          creator={post.creator}
-          text={post.text}
-          img={tempPostImg2}
-          nbLikes={post.likes.length}
-          nbComments={post.comments.length}
-        />
-      ))}
+      <CreatePost profile={profile} />
+      {posts.map((post, key) => {
+        return <Post key={key} post={post} />;
+      })}
     </div>
   );
 };

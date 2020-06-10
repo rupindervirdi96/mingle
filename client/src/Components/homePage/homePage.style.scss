@@ -3,6 +3,7 @@
   position: relative;
   top: 59px;
   width: 100%;
+  min-height: calc(100vh - 59px);
   display: grid;
   text-align: center;
   grid-template-columns: 1fr 500px 1fr;

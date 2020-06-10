@@ -5,23 +5,16 @@ import UserButton from "../../Button/UserButton/userButton.component";
 // import { fetchUser, setUser } from "../../../actions/userActions";
 import "./friendList.style.scss";
 
-const FriendList = ({ style }) => {
-  const { users } = useSelector((state) => ({
-    users: state.users.users,
-  }));
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchUser());
-  //   console.log(style);
-  // }, []);
-
+const FriendList = ({ profile }) => {
+  // const { profile } = useSelector((state) => ({
+  //   profile: state.users.profile.contacts.friends,
+  // }));
   return (
-    <div style={{ display: style }} className="friend-list-container">
+    <div className="friend-list-container">
       <span className="friends-heading">Friends</span>
       <ul type="none" className="friend-list">
-        {users.map((user, key) => (
-          <UserButton key={key} user={user} img={profile} />
+        {profile.map((profile, key) => (
+          <UserButton key={key} prof={profile} />
         ))}
       </ul>
     </div>

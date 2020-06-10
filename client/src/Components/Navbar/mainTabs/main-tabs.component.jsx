@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
 import { ReactComponent as FriendsIcon } from "../../../svg/friends.svg";
 import profilePic from "../../../assets/profile.png";
-// import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
-// import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
-// import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
+import { removeFriendsProfile } from "../../../actions/userActions";
+import { useDispatch } from "react-redux";
 
 const MainTabs = () => {
+  const dispatch = useDispatch();
   return (
     <div className="main-tabs-container">
       <ul type="none">
@@ -17,13 +17,8 @@ const MainTabs = () => {
             <HomeIcon />
           </li>
         </Link>
-        <Link to="/friends">
-          <li>
-            <FriendsIcon fill="#000000" />
-          </li>
-        </Link>
         <Link to="/profile">
-          <li>
+          <li onClick={() => dispatch(removeFriendsProfile())}>
             <img
               style={{ borderRadius: "50%" }}
               src={profilePic}
@@ -32,14 +27,9 @@ const MainTabs = () => {
             />
           </li>
         </Link>
-        <Link to="/home">
+        <Link to="/friends">
           <li>
-            <HomeIcon />
-          </li>
-        </Link>
-        <Link to="/home">
-          <li>
-            <HomeIcon />
+            <FriendsIcon fill="#000000" />
           </li>
         </Link>
       </ul>

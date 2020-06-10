@@ -8,4 +8,6 @@ export default combineReducers({
     users: userReducer,
     posts: postReducer,
     profile: profileReducer
-})  
+})
+
+// export default rootReducer;

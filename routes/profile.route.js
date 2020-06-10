@@ -8,13 +8,11 @@ const Profile = require('../models/profile.model');
 //desc      createProfile
 //acces     private
 router.post('/me', auth, async (req, res) => {
-    console.log("hello");
 
     try {
         const profile = await Profile.findOne({
             user: req.user.id
         }).populate("user", ["name", "birthdate", "gender"]);
-        console.log(profile);
 
         if (profile) {
             console.log("profile found");
@@ -58,6 +56,7 @@ router.get('/:id', async (req, res) => {
 router.put('/update/status', auth, async (req, res) => {
 
     try {
+        console.log(req.body);
         const profile = await Profile.findOneAndUpdate(
             { user: req.user.id },
             { $set: { status: req.body.status } },
@@ -97,11 +96,13 @@ router.put('/update/friends/request/:id', auth, async (req, res) => {
             const friend = {
                 id: profile.id,
                 name: profile.name,
+                photo: profile.profilePic,
                 status: "received"
             }
             const request = {
                 id: friendsProfile.id,
                 name: friendsProfile.name,
+                photo: profile.profilePic,
                 status: "requested"
             }
 
@@ -142,6 +143,7 @@ router.put('/update/friends/accept/:id', auth, async (req, res) => {
                 profile.contacts.requests.splice(i, 1);
                 const friend = {
                     id: friendsProfile.id,
+                    photo: friendsProfile.profilePic,
                     name: friendsProfile.name
                 }
                 profile.contacts.friends.unshift(friend)
@@ -152,13 +154,12 @@ router.put('/update/friends/accept/:id', auth, async (req, res) => {
                 friendsProfile.contacts.requests.splice(i, 1);
                 const friend = {
                     id: profile.id,
+                    photo: profile.profilePic,
                     name: profile.name
                 }
                 friendsProfile.contacts.friends.unshift(friend)
             }
         }
-        console.log("Hello");
-
         await profile.save()
         await friendsProfile.save()
         // res.json({ prof: profile, frndProf: friendsProfile })
@@ -214,7 +215,104 @@ router.get('/update/suggestions', auth, async (req, res) => {
     }
 });
 
+//route     profile/friends/get
+//desc      getFriends
+//acces     private
+router.get("/friends/get", auth, async (req, res) => {
+    try {
+        const profile = await Profile.findOne({
+            user: req.user.id
+        })
 
+        const friends = []
+        profile.contacts.friends.forEach(friend => {
+            friends.push(friend);
+        })
+        res.json(friends)
+    } catch (error) {
+        res.json(error.message)
+    }
+})
+
+//route     profile/friends/get
+//desc      getAllRequest
+//acces     private
+router.get("/requests/get", auth, async (req, res) => {
+    try {
+        const profile = await Profile.findOne({
+            user: req.user.id
+        })
+        let requests = []
+        profile.contacts.requests.forEach(request => {
+            if (request.status == "received") {
+                requests.push(request);
+            }
+        })
+
+        res.json(requests)
+    } catch (error) {
+        res.json(error.message)
+    }
+})
+
+//route     profile/friends/get
+//desc      changeInfo
+//acces     private
+router.post("/info/change", auth, async (req, res) => {
+    const { type } = req.body
+    const profile = await Profile.findOne({ user: req.user.id });
+    switch (type) {
+        case "work":
+            profile.info.push(req.body);
+            break;
+        case "education":
+            profile.info.push(req.body);
+            break;
+        case "location":
+            profile.info.push(req.body)
+            break;
+        case "relation":
+            profile.info.push(req.body);
+            break;
+
+        default:
+            break;
+    }
+    await profile.save();
+})
+
+//route     profile/friends/get
+//desc      getInfo
+//acces     private
+router.get("/info/getinfo", auth, async (req, res) => {
+    const profile = await Profile.findOne({ user: req.user.id });
+    // console.log(profile.info);
+    res.json(profile.info)
+});
+
+
+//route     profile/photo/prof
+//desc      setProfilePhoto
+//acces     private
+router.post("/photo/prof", auth, async (req, res) => {
+
+    const profile = await Profile.findOne({ user: req.user.id });
+    profile.profilePic = req.body.pic;
+    await profile.save();
+
+});
+
+//route     profile/photo/cover
+//desc      setCoverPhoto
+//acces     private
+router.post("/photo/cover", auth, async (req, res) => {
+
+    const profile = await Profile.findOne({ user: req.user.id });
+    profile.coverPic = req.body.pic;
+    await profile.save();
+    // profile.coverPic = req.body;
+    // profile.save();
+});
 
 
 module.exports = router;

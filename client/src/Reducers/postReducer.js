@@ -1,23 +1,26 @@
-// import { FETCH_POSTS, ADD_POST } from "../actions/types";
-import { FETCH_POSTS, ADD_POST } from "../actions/types"
+import { GET_MY_POSTS, LIKE_POST, GET_POSTS_FOR_ANY_USER, GET_FRIENDS_POSTS } from "../actions/types"
 
 
 const initialState = {
-    posts: [],
-    // latestPost: {}
+    MyPosts: [],
+    FriendsPost: [],
+    UserPosts: []
 }
 
 export default function (state = initialState, { type, data }) {
     switch (type) {
-        case FETCH_POSTS:
+        case GET_MY_POSTS:
             return {
-                ...state, posts: data
+                ...state, MyPosts: data
             }
-        case ADD_POST:
+        case GET_POSTS_FOR_ANY_USER:
             return {
-                ...state, posts: [data, ...state.posts]
+                ...state, UserPosts: data
             }
-
+        case GET_FRIENDS_POSTS:
+            return {
+                ...state, FriendsPost: data
+            }
         default:
             return state;
     }

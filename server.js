@@ -20,11 +20,13 @@ app.use(cors())
 const PORT = process.env.PORT || 5000;
 
 
+
+
 app.use('/users', require('./routes/user.route'));
 app.use('/posts', require('./routes/post.route'));
 app.use('/auth', require('./routes/auth.route'));
 app.use('/profile', require('./routes/profile.route'));
-app.use('/message', require('./routes/profile.route'));
+app.use('/message', require('./routes/message.route'));
 
 
 

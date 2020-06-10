@@ -46,7 +46,8 @@
     }
 
     img {
-      height: 33px;
+      height: 35px;
+      width: 35px;
       background-color: #eee;
       border-radius: 50%;
       margin-right: 10px;
@@ -69,8 +70,10 @@
     align-items: center;
 
     ul {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
       padding: 0px 10px;
       width: 90%;
       margin: auto;
@@ -84,10 +87,21 @@
         padding: 10px;
         border-radius: 8px;
         font-size: 14px;
+        transition: 200ms all linear;
 
         img {
           margin: 0px 3px 0px 0px;
         }
+      }
+
+      input {
+        width: 0px;
+        border-radius: 15px;
+        background-color: #eee;
+        border: none;
+        padding: 5px;
+        opacity: 0;
+        transition: 200ms all linear;
       }
 
       li:hover {

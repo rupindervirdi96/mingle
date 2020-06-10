@@ -1,12 +1,12 @@
 import React from "react";
 import "./userButton.style.scss";
 
-const UserButton = ({ user, img }) => {
+const UserButton = ({ profile }) => {
   return (
     <div className="userBtn">
       <button>
-        <img src={img} height="30px" width="30px" alt="" />
-        <span>{user.firstName}</span>
+        <img src={profile.photo} height="30px" width="30px" alt="" />
+        <span>{profile.name}</span>
         <div className="status"></div>
       </button>
     </div>
