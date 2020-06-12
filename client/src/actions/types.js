@@ -8,6 +8,8 @@ export const GET_SUGGESTIONS = "GET_SUGGESTIONS";
 export const GET_FRIENDS = "GET_FRIENDS";
 export const GET_REQUESTS = "GET_REQUESTS";
 export const GET_INFO = "GET_INFO";
+export const NEW_CHAT = "NEW_CHAT";
+export const NEW_MESSAGE = "NEW_MESSAGE";
 
 //POSTS
 export const GET_MY_POSTS = "GET_MY_POSTS";

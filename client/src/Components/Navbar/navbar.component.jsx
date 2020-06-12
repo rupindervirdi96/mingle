@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div className="nav-bar">
       <Search />
-      <MainTabs />
+      <MainTabs profile={profile} />
       <SecondaryTabs name={profile.name} />
     </div>
   );

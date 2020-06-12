@@ -1,9 +1,24 @@
 .nav-bar {
   display: grid;
   grid-template-columns: 1fr 500px 1fr;
-  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 80px;
   z-index: 5;
-  padding: 0px 10px;
+  // padding: 0px 10px;
   background-color: #fff;
   font-family: "Baloo Bhai 2";
+  overflow: visible;
+
+  @media (max-width:"1200px") {
+    grid-template-columns: 1fr 200px 1fr;
+
+
+  }
+
+  @media (max-width:"800px") {
+    grid-template-columns: 1fr 200px 1fr;
+
+
+  }
 }

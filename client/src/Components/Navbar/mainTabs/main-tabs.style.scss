@@ -1,5 +1,6 @@
 .main-tabs-container {
-  ul {
+
+  .tabs-list {
     width: 100%;
     height: 100%;
     display: flex;
@@ -25,9 +26,88 @@
     }
 
     li:hover {
-  border-bottom: 3px solid rgb(0, 119, 255);
-  background-color: #eee;
-}
+      border-bottom: 3px solid rgb(0, 119, 255);
+      background-color: #eee;
+    }
 
+
+  }
+
+  @media (max-width:1000px) {
+    .tabs-list {
+      display: none;
+    }
+  }
+
+
+  .hamburger {
+    display: none;
+    height: 40px;
+    width: 40px;
+    // background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png),
+    // #fff;
+    background-position: center;
+    background-size: cover;
+    // background-color: white;
+    position: absolute;
+    // background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  .dropDownList {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    // display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    transition: 150ms opacity ease-out;
+
+
+    a,
+    li {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      width: 90%;
+      font-weight: bold;
+      border-radius: 5px;
+      margin: 10px auto;
+      font-size: 20px;
+      color: #0077ff;
+    }
+
+  }
+
+  .displayList {
+    opacity: 1;
+    height: auto;
+    transition: 150ms opacity ease-in;
+  }
+
+
+  @media (max-width:1000px) {
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  @media (min-width:1000px) {
+    .dropDownList {
+      display: none;
+    }
   }
 }

@@ -6,6 +6,7 @@ const socketio = require('socket.io');
 const io = socketio(server);
 const connectDB = require('./config/db');
 var cors = require('cors');
+// /const proxy = require('express-http-proxy');
 
 
 
@@ -19,14 +20,20 @@ app.use(cors())
 
 const PORT = process.env.PORT || 5000;
 
-
+// app.use('/__webpack_hmr', proxy({ ws: true, target: 'http://localhost:5000' }));
+io.on('connection', (socket) => {
+    console.log("User Connected");
+    socket.on('disconnect', () => {
+        console.log("User Left");
+    })
+});
 
 
 app.use('/users', require('./routes/user.route'));
 app.use('/posts', require('./routes/post.route'));
 app.use('/auth', require('./routes/auth.route'));
 app.use('/profile', require('./routes/profile.route'));
-app.use('/message', require('./routes/message.route'));
+app.use('/messages', require('./routes/message.route'));
 
 
 

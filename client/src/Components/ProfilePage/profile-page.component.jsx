@@ -54,27 +54,45 @@ const ProfilePage = ({ friendsProfile, profile }) => {
       <div className="top-section">
         <div className="top-section-content">
           <div
-            style={{ backgroundImage: "url(" + profile.coverPic + ")" }}
+            style={
+              friendsProfile == null
+                ? { backgroundImage: "url(" + profile.coverPic + ")" }
+                : { backgroundImage: "url(" + friendsProfile.coverPic + ")" }
+            }
             className="cover"
           >
-            <img
-              src={edit}
-              onClick={() => {
-                setClick4(true);
-              }}
-              alt=""
-            />
-            <div
-              style={{ backgroundImage: "url(" + profile.profilePic + ")" }}
-              className="profile-photo"
-            >
+            {friendsProfile == null ? (
               <img
                 src={edit}
                 onClick={() => {
-                  setClick3(true);
+                  setClick4(true);
                 }}
                 alt=""
               />
+            ) : (
+              ""
+            )}
+            <div
+              style={
+                friendsProfile == null
+                  ? { backgroundImage: "url(" + profile.profilePic + ")" }
+                  : {
+                      backgroundImage: "url(" + friendsProfile.profilePic + ")",
+                    }
+              }
+              className="profile-photo"
+            >
+              {friendsProfile == null ? (
+                <img
+                  src={edit}
+                  onClick={() => {
+                    setClick3(true);
+                  }}
+                  alt=""
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="userDescription">

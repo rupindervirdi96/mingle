@@ -35,6 +35,13 @@ const ProfileSchema = new mongoose.Schema({
         requests: [{
         }]
     },
+    //follow how friends in contacts is working.
+    chats: [{
+        // chat: {
+        //     roomId: { type: String },
+        //     friendProfile: { type: String },
+        // }
+    }],
     info: [{ type: Object }]
 })
 
