@@ -5,6 +5,7 @@ import {
 }
 
     from "./types";
+import io from "socket.io-client";
 
 import axios from "axios";
 
@@ -22,15 +23,20 @@ export const getMessages = (chatId) => async dispatch => {
 }
 
 export const sendMessage = (data) => async dispatch => {
-    axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    var res = await axios.post(`http://localhost:5000/messages/`, data);
+    // axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
+    // var res = await axios.post(`http://localhost:5000/messages/`, data);
+    io("http://localhost:5000").emit("input chat message", data);
+    io("http://localhost:5000").on('output chat message', (data) => {
+        dispatch({
+            type: NEW_MESSAGE,
+            data: data
+        })
+        document
+            .querySelector(".messagesWindow")
+            .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
+    })
 
-    dispatch({
-        type: NEW_MESSAGE,
-        data: res.data
-    }
 
-    )
 }
 
 export const removeChat = (id) => dispatch => {

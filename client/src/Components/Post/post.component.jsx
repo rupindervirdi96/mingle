@@ -21,7 +21,7 @@ const Post = ({ post }) => {
   return (
     <div className="post">
       <div className="creator">
-        {post.profile == profile._id ? (
+        {post.profile === profile._id ? (
           <div
             style={{
               backgroundImage: `url(${profile.profilePic})`,

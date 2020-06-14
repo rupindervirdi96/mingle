@@ -17,10 +17,9 @@ app.use(cors())
 
 
 
-io.on('connect', (socket) => {
+io.on('connection', (socket) => {
     console.log("User Connected");
     socket.on('input chat message', async (data) => {
-
         try {
             const profile = await Profile.findOne({ user: data.userid });
             const friendsProfile = await Profile.findOne({ _id: data.id })
@@ -42,8 +41,7 @@ io.on('connect', (socket) => {
             var data = {
                 id: friendsProfile._id.toString(), messages: room.messages
             }
-            socket.emit('message', { text: "Hello" });
-            console.log("inside here");
+            socket.broadcast.emit('output chat message', data)
         }
         catch (error) {
             res.json(error.message)

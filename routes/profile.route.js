@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const Profile = require('../models/profile.model');
+const Post = require('../models/post.model');
+const { find } = require('../models/profile.model');
 
 
 //route     profile/me
@@ -299,6 +301,15 @@ router.post("/photo/prof", auth, async (req, res) => {
     const profile = await Profile.findOne({ user: req.user.id });
     profile.profilePic = req.body.pic;
     await profile.save();
+    const posts = await Post.find({
+        profile: profile._id.toString()
+    });
+    console.log(posts);
+
+    posts.forEach(post => {
+        post.profPic = req.body.pic;
+        post.save();
+    })
 
 });
 

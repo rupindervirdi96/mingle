@@ -27,15 +27,11 @@ function Chat({ chat }) {
     const data = {
       id: chat.friend.id,
       text: text,
+      userid: profile.user.toString(),
     };
 
-    // io().emit("input chat message", data);
     // console.log(data);
     await dispatch(sendMessage(data));
-
-    document
-      .querySelector(".messagesWindow")
-      .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
     document.querySelector(".messageText").value = "";
     // dispatch(getMessages(chat.friend.id));
   };
@@ -44,8 +40,13 @@ function Chat({ chat }) {
     document
       .querySelector(".messagesWindow")
       .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
-    document.querySelector(".messageText").value = "";
     document.querySelector(".messageText").focus();
+    const data = {
+      id: chat.friend.id,
+      text: text,
+      userid: profile.user.toString(),
+    };
+    // dispatch(getMessages(data));
   }, []);
   return (
     <div className="Chat-Container">
