@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import "./feed.style.scss";
 import CreatePost from "../../CreatePost/create-post.component";
 import Post from "../../Post/post.component";
-import tempPostImg from "../../../assets/temp-default-img.png";
-import tempPostImg2 from "../../../assets/temp-default-img2.png";
-import { useSelector, useDispatch } from "react-redux";
-import { getMyPosts } from "../../../actions/postAction";
+import { useSelector } from "react-redux";
 
 const Feed = () => {
   const { profile, posts } = useSelector((state) => ({

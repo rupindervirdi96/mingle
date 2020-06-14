@@ -1,4 +1,4 @@
-import { NEW_CHAT, NEW_MESSAGE } from "../actions/types";
+import { NEW_CHAT, NEW_MESSAGE, REMOVE_CHAT } from "../actions/types";
 
 
 const initialState = {
@@ -13,11 +13,10 @@ export default function (state = initialState, action) {
                 ...state, chatsOpen: [...state.chatsOpen, action.data]
             }
         case NEW_MESSAGE:
-            // console.log(action.data);
             return {
                 ...state,
                 chatsOpen: state.chatsOpen.map(chat => {
-                    console.log(chat.friend.id, action.data.id);
+                    // console.log(chat.friend.id, action.data.id);
 
                     if (chat.friend.id === action.data.id) {
                         return { ...chat, messages: action.data.messages }
@@ -25,6 +24,8 @@ export default function (state = initialState, action) {
                     return chat
                 }),
             }
+        case REMOVE_CHAT:
+            return { ...state, chatsOpen: state.chatsOpen.filter(chat => chat.friend.id != action.data) }
         default:
             return state;
     }

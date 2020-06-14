@@ -1,19 +1,31 @@
 .contactss {
-    position: fixed;
-    left: 100%;
-    transform: translateX(-100%);
-    display: flex;
-    justify-content: flex-end;
+  position: fixed;
+  left: 100%;
+  transform: translateX(-100%);
+  display: flex;
+  justify-content: flex-end;
+  transition: 300ms all linear;
 
-    .lists {
-        width: 225px;
-        background-color: #eee;
-        box-shadow: -1px 0px 4px 0px rgba($color: #000000, $alpha: 0.1);
+  .lists {
+    width: 250px;
+    background-color: #eee;
+    box-shadow: -1px 0px 4px 0px rgba($color: #000000, $alpha: 0.1);
 
-        h1 {
-            text-align: left;
+    h1 {
+      text-align: left;
 
-            padding-left: 9px;
-        }
+      padding-left: 9px;
     }
+  }
+}
+@media (max-width: "1000px") {
+  .contactss {
+    transform: translateX(0%);
+    transition: 200ms all linear;
+  }
+
+  .appear {
+    transform: translateX(-100%);
+    transition: 200ms all linear;
+  }
 }

@@ -1,12 +1,10 @@
 const express = require('express');
-const http = require('http');
-const app = express();
-const server = http.createServer(app);
-const socketio = require('socket.io');
-const io = socketio(server);
 const connectDB = require('./config/db');
 var cors = require('cors');
-// /const proxy = require('express-http-proxy');
+const { log } = require('console');
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 
 
@@ -18,15 +16,46 @@ app.use(express.json({ extended: false }));
 app.use(cors())
 
 
+
+io.on('connect', (socket) => {
+    console.log("User Connected");
+    socket.on('input chat message', async (data) => {
+
+        try {
+            const profile = await Profile.findOne({ user: data.userid });
+            const friendsProfile = await Profile.findOne({ _id: data.id })
+            var message = new Message({ sender: profile._id, text: data.text });
+            var roomId;
+            profile.chats.forEach((chat) => {
+                if (chat.friendsProfile == friendsProfile._id.toString()) {
+                    roomId = chat.roomId;
+                }
+            })
+
+            var room = await ChatRoom.findOne({
+                _id: roomId
+            });
+            if (room) {
+                room.messages.push(message);
+                room.save();
+            }
+            var data = {
+                id: friendsProfile._id.toString(), messages: room.messages
+            }
+            socket.emit('message', { text: "Hello" });
+            console.log("inside here");
+        }
+        catch (error) {
+            res.json(error.message)
+        }
+    }
+    )
+
+});
+
+
 const PORT = process.env.PORT || 5000;
 
-// app.use('/__webpack_hmr', proxy({ ws: true, target: 'http://localhost:5000' }));
-io.on('connection', (socket) => {
-    console.log("User Connected");
-    socket.on('disconnect', () => {
-        console.log("User Left");
-    })
-});
 
 
 app.use('/users', require('./routes/user.route'));

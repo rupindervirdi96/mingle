@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./create-post.style.scss";
-import feeling from "../../assets/feeling.png";
-import tag from "../../assets/tag.png";
-import profilePic from "../../assets/profile.png";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../actions/postAction";
 
@@ -35,7 +32,17 @@ const CreatePost = ({ profile }) => {
     <div className="create-post">
       <form className="create-post-form" action="" onSubmit={onSubmit}>
         <div className="textPost">
-          <img src={profile.profilePic} alt="" />
+          <div
+            style={{
+              backgroundImage: `url(${profile.profilePic})`,
+              borderRadius: "50%",
+              height: "38px",
+              marginRight: "8px",
+              width: "38px",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          ></div>
           <div className="postText">
             <div
               className="post-text-message"
@@ -52,8 +59,10 @@ const CreatePost = ({ profile }) => {
           <ul type="none">
             <li
               onClick={() => {
-                let input = (document.querySelector(".addImage").style =
-                  "flex:3;opacity:1;transition:200ms all linear");
+                let input = document.querySelector(".addImage");
+                input.classList.contains("inputMove")
+                  ? input.classList.remove("inputMove")
+                  : input.classList.add("inputMove");
               }}
             >
               <img

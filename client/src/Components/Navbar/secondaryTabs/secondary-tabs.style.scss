@@ -3,12 +3,6 @@
   grid-template-columns: max-content max-content;
   justify-content: end;
 
-
-
-
-
-
-
   ul {
     display: flex;
     height: 100%;
@@ -22,9 +16,13 @@
       height: 40px;
       width: 40px;
       margin: 5px;
-
-      img {
-        margin: auto;
+      justify-content: center;
+      align-items: center;
+    }
+    .messenger {
+      display: none;
+      @media (max-width: "1000px") {
+        display: flex;
       }
     }
   }
@@ -55,9 +53,7 @@ a {
     padding: 0px 5px;
   }
 
-  @media (max-width:"600px") {
+  @media (max-width: "1000px") {
     display: none;
-
-
   }
 }

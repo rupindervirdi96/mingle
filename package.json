@@ -2,7 +2,7 @@
   "name": "facebook-clone",
   "version": "1.0.0",
   "description": "facebook clone college project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0",
     "express-validator": "^6.4.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.26.0",
@@ -34,6 +35,5 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.3"
-  },
-  "proxy": "https://localhost:5000"
+  }
 }

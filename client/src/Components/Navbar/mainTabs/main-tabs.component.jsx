@@ -3,7 +3,6 @@ import "./main-tabs.style.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
 import { ReactComponent as FriendsIcon } from "../../../svg/friends.svg";
-import profilePic from "../../../assets/profile.png";
 import hamburger from "../../../svg/hamburger.svg";
 import { removeFriendsProfile } from "../../../actions/userActions";
 import { useDispatch } from "react-redux";
@@ -77,13 +76,16 @@ const MainTabs = ({ profile }) => {
         </Link>
         <Link to="/profile">
           <li onClick={() => dispatch(removeFriendsProfile())}>
-            <img
-              style={{ borderRadius: "50%" }}
-              src={profile.profilePic}
-              height="40px"
-              width="40px"
-              alt=""
-            />
+            <div
+              style={{
+                backgroundImage: `url(${profile.profilePic})`,
+                borderRadius: "50%",
+                height: "40px",
+                width: "40px",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+              }}
+            ></div>
           </li>
         </Link>
         <Link to="/friends">

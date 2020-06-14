@@ -58,14 +58,25 @@ const Register = () => {
           <h3>It's quick and easy.</h3>
           <form action="" onSubmit={onSubmit}>
             {/* <div className="name"> */}
-            <input type="text" placeholder="Name" onChange={onChangeName} />
+            <input
+              type="text"
+              placeholder="Name"
+              onChange={onChangeName}
+              required
+            />
             {/* </div> */}
-            <input type="email" placeholder="Email" onChange={onChangeEmail} />
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={onChangeEmail}
+              required
+            />
             <input
               type="password"
               placeholder="Password"
               autoComplete="false"
               onChange={onChangePassword}
+              required
             />
             <h3>Birthday</h3>
             <div>
@@ -74,13 +85,14 @@ const Register = () => {
                 dateFormat="MM/dd/yyyy"
                 selected={user.birthdate}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="gender">
               <h3>Gender</h3>
               <div className="genders">
                 <div className="male">
-                  <input type="radio" name="gender" value="Male" />
+                  <input type="radio" name="gender" value="Male" checked />
                   <label>Male</label>
                 </div>
                 <div className="female">

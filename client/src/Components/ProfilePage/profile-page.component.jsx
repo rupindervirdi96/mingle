@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./profile-page.style.scss";
 import CreatePost from "../../Components/CreatePost/create-post.component";
 import Post from "../Post/post.component";
 import Info from "./Info/info.component";
-import postImage from "../../assets/profile.png";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import edit from "../../assets/edit.png";
 import Edit from "../Edit/edit.component";
 

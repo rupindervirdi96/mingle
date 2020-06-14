@@ -1,5 +1,6 @@
 import React from "react";
 import "./userButton.style.scss";
+import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages } from "../../../actions/messageActions";
 
@@ -17,6 +18,9 @@ const UserButton = ({ profile }) => {
       }
     });
     if (!Open) {
+      io().on("message", (data) => {
+        alert(data.text);
+      });
       dispatch(getMessages(id));
     }
   };
@@ -25,10 +29,22 @@ const UserButton = ({ profile }) => {
       className="userBtn"
       onClick={() => {
         getAllMessages(profile);
+        var chats = document.querySelector(".chats");
+        chats.classList.remove("hidden");
       }}
     >
       <button>
-        <img src={profile.photo} height="30px" width="30px" alt="" />
+        <div
+          style={{
+            backgroundImage: `url(${profile.photo})`,
+            borderRadius: "50%",
+            height: "40px",
+            width: "40px",
+            marginRight: "10px",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        ></div>
         <span>{profile.name}</span>
         <div className="status"></div>
       </button>

@@ -5,7 +5,6 @@ import Chat from "./Chat/chat.component";
 import FriendList from "./friendList/friendList.component";
 import { useSelector } from "react-redux";
 const ChatSection = ({ profile }) => {
-  const [clicked, setClicked] = useState(false);
   const { chatsOpen } = useSelector((state) => ({
     chatsOpen: state.messages.chatsOpen,
   }));
@@ -19,7 +18,14 @@ const ChatSection = ({ profile }) => {
       <div className="friends">
         <ChatBtn
           Click={() => {
-            clicked ? setClicked(false) : setClicked(true);
+            var chats = document.querySelector(".chats");
+            chats.classList.contains("hidden")
+              ? chats.classList.remove("hidden")
+              : chats.classList.add("hidden");
+            var chatCont = document.querySelector(".chat-section");
+            chatCont.classList.contains("minimizeChat")
+              ? chatCont.classList.remove("minimizeChat")
+              : chatCont.classList.add("minimizeChat");
           }}
         />
       </div>

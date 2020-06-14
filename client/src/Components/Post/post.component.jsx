@@ -1,26 +1,50 @@
 import React from "react";
 import "./post.style.scss";
-import profileIm from "../../assets/profile.png";
 import { likePost } from "../../actions/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import like from "../../assets/like.png";
+import { useState } from "react";
 
 const Post = ({ post }) => {
+  const [liked, setLiked] = useState(false);
+
   const { profile } = useSelector((state) => ({
     profile: state.users.profile,
   }));
   const dispatch = useDispatch();
+
   const LikePost = () => {
     dispatch(likePost(post._id.toString()));
     window.location.reload();
+    liked ? setLiked(false) : setLiked(true);
   };
   return (
     <div className="post">
       <div className="creator">
         {post.profile == profile._id ? (
-          <img src={profile.profilePic} alt="" />
+          <div
+            style={{
+              backgroundImage: `url(${profile.profilePic})`,
+              borderRadius: "50%",
+              height: "40px",
+              width: "40px",
+              marginRight: "10px",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          ></div>
         ) : (
-          <img src={post.profPic} alt="" />
+          <div
+            style={{
+              backgroundImage: `url(${post.profPic})`,
+              borderRadius: "50%",
+              marginRight: "10px",
+              height: "40px",
+              width: "40px",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          ></div>
         )}
         <span>{post.name}</span>
       </div>
@@ -35,17 +59,13 @@ const Post = ({ post }) => {
         <div className="likeCommentCounter">
           <span className="nbLikes">
             <span>{post.likes.length}</span>
-            <img height="35px" src={like} alt="" />
-            <div></div>
+            <img height="45px" src={like} alt="" />
           </span>
-          <span className="nbComments">{post.comments.length} comments</span>
         </div>
         <hr />
         <ul type="none">
-          <li onClick={LikePost}>Like</li>
-          <li>Comment</li>
+          <li onClick={LikePost}>LIKE</li>
         </ul>
-        {/* <input type="file" accept="image/*" /> */}
       </div>
     </div>
   );

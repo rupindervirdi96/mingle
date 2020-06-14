@@ -10,6 +10,7 @@ export const GET_REQUESTS = "GET_REQUESTS";
 export const GET_INFO = "GET_INFO";
 export const NEW_CHAT = "NEW_CHAT";
 export const NEW_MESSAGE = "NEW_MESSAGE";
+export const REMOVE_CHAT = "REMOVE_CHAT";
 
 //POSTS
 export const GET_MY_POSTS = "GET_MY_POSTS";

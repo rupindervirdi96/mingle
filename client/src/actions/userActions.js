@@ -10,11 +10,13 @@ export const loginUser = (loginInfo) => async dispatch => {
         sessionStorage.setItem('auth', JSON.stringify(res.data.token));
         window.location = "/home";
     } catch (error) {
-        console.log("Errorr" + error.message);
+        // console.log("Error" + error.message);
+        alert(error.message)
     }
 
 }
 export const register = (user) => async dispatch => {
+    let res;
     try {
         const config = {
             headers: {
@@ -24,12 +26,16 @@ export const register = (user) => async dispatch => {
 
         const body = JSON.stringify(user);
 
-        const res = await axios.post(
+        res = await axios.post(
             "http://localhost:5000/users/",
             body,
             config
         );
-        console.log(res);
+        if (res.data.error) {
+            alert(res.data.error)
+        }
+        alert(res.data.msg)
+        // console.log(res);
     } catch (error) {
         console.log(error.message);
     }

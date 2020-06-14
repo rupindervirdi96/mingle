@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { ReactComponent as Emoji } from "../../../svg/emoji.svg";
-import { ReactComponent as Cross } from "../../../svg/cross.svg";
+import cross from "../../../assets/cross.png";
 import "./chat.style.scss";
-import openSocket from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 import send from "../../../assets/send.png";
 import Message from "./message.component";
 import { useSelector, useDispatch } from "react-redux";
-import { sendMessage, getMessages } from "../../../actions/messageActions";
+import {
+  sendMessage,
+  getMessages,
+  removeChat,
+} from "../../../actions/messageActions";
 
+let socket = Socket;
 function Chat({ chat }) {
   const { profile } = useSelector((state) => ({
     profile: state.users.profile,
@@ -17,20 +22,31 @@ function Chat({ chat }) {
 
   const dispatch = useDispatch();
 
-  const sendMessages = (e) => {
+  const sendMessages = async (e) => {
     e.preventDefault();
-    // const socket=io();
-    let messageBody = document.querySelector(".messagesWindow");
-    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
     const data = {
       id: chat.friend.id,
       text: text,
     };
 
-    dispatch(sendMessage(data));
-    console.log(chat);
+    // io().emit("input chat message", data);
+    // console.log(data);
+    await dispatch(sendMessage(data));
+
+    document
+      .querySelector(".messagesWindow")
+      .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
+    document.querySelector(".messageText").value = "";
+    // dispatch(getMessages(chat.friend.id));
   };
 
+  useEffect(() => {
+    document
+      .querySelector(".messagesWindow")
+      .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
+    document.querySelector(".messageText").value = "";
+    document.querySelector(".messageText").focus();
+  }, []);
   return (
     <div className="Chat-Container">
       <div className="chat-box">
@@ -40,7 +56,18 @@ function Chat({ chat }) {
             style={{ backgroundImage: `url(${chat.friend.profPic})` }}
           ></div>
           <span>{chat.friend.name}</span>
-          <Cross />
+          <div
+            onClick={() => {
+              dispatch(removeChat(chat.friend.id));
+            }}
+            style={{
+              width: "20px",
+              height: "20px",
+              backgroundImage: `url(${cross})`,
+              backgroundPosition: "center",
+              backgroundSize: "center",
+            }}
+          ></div>
         </div>
         <div className="messagesWindow">
           {chat.messages.map((message, key) => {
@@ -56,6 +83,7 @@ function Chat({ chat }) {
             <Emoji />
             <input
               type="text"
+              className="messageText"
               onChange={(e) => {
                 setText(e.target.value);
               }}
@@ -76,3 +104,19 @@ function Chat({ chat }) {
 }
 
 export default Chat;
+
+// const useSocket = (serverUrl, topic) => {
+//   const [temp, setTemp] = React.useState(0);
+//   const [isConnected, setConnected] = React.useState(false);
+
+//   React.useEffect(() => {
+//     const client = socket.connect(serverUrl);
+//     client.on("connect", () => setConnected(true));
+//     client.on("disconnect", () => setConnected(false));
+//     client.on(topic, (data) => {
+//       setTemp(data);
+//     });
+//   }, [serverUrl, topic, isConnected]);
+
+//   return { temp, isConnected };
+// };

@@ -9,11 +9,14 @@ import { getPostsForAnyUser } from "../../actions/postAction";
 import Default from "./default/default.component";
 
 const ContactsPage = ({ profile }) => {
-  const { friendsProfile, suggestions, requests } = useSelector((state) => ({
-    friendsProfile: state.users.friendsProfile,
-    suggestions: state.profile.suggestions,
-    requests: state.profile.requests,
-  }));
+  const { friendsProfile, suggestions, requests, friends } = useSelector(
+    (state) => ({
+      friendsProfile: state.users.friendsProfile,
+      suggestions: state.profile.suggestions,
+      requests: state.profile.requests,
+      friends: state.profile.friends,
+    })
+  );
 
   const dispatch = useDispatch();
 
@@ -55,6 +58,20 @@ const ContactsPage = ({ profile }) => {
               }}
               contact={contact}
               key={key}
+            />
+          );
+        })}
+        <h3 style={{ paddingLeft: "8px" }}>Friends</h3>
+        {friends.map((contact, key) => {
+          return (
+            <Contacts
+              openProfile={(id) => {
+                dispatch(getProfile(id));
+                dispatch(getPostsForAnyUser(id));
+              }}
+              contact={contact}
+              key={key}
+              status="friend"
             />
           );
         })}

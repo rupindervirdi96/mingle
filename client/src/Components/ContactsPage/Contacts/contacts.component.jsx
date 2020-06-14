@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import profilePic from "../../../assets/profile.png";
+import React from "react";
 import "./contacts.style.scss";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-const Contacts = ({ status, contact, openProfile, type }) => {
+const Contacts = ({ status, contact, openProfile }) => {
   const acceptRequest = () => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
@@ -31,17 +28,39 @@ const Contacts = ({ status, contact, openProfile, type }) => {
   };
 
   const deleteRequest = () => {
-    console.log("Deleted");
+    console.log(contact);
   };
 
   return (
     <div className="contact">
-      <img src={profilePic} alt="" />
+      {status == "received" || status == "friend" ? (
+        <div
+          style={{
+            backgroundImage: `url(${contact.photo})`,
+            borderRadius: "50%",
+            height: "40px",
+            width: "40px",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        ></div>
+      ) : (
+        <div
+          style={{
+            backgroundImage: `url(${contact.profilePic})`,
+            borderRadius: "50%",
+            height: "40px",
+            width: "40px",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        ></div>
+      )}
       <div className="contact-info">
         <span
           className="name"
           onClick={() => {
-            status === "received"
+            status === "received" || status === "friend"
               ? openProfile(contact.id)
               : openProfile(contact._id);
           }}
@@ -54,6 +73,8 @@ const Contacts = ({ status, contact, openProfile, type }) => {
             <button onClick={acceptRequest} className="btnAcceptReq">
               Accept
             </button>
+          ) : status === "friend" ? (
+            ""
           ) : (
             <button onClick={sendRequest} className="btnAddFriend">
               Add Friend

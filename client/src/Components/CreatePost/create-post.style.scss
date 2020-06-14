@@ -40,8 +40,6 @@
         border: 0;
         background: rgba(0, 0, 0, 0);
         resize: none;
-
-
       }
     }
 
@@ -83,8 +81,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex: 1;
-        padding: 10px;
+        margin: 5px;
+        padding: 5px 8px;
         border-radius: 8px;
         font-size: 14px;
         transition: 200ms all linear;
@@ -103,14 +101,17 @@
         opacity: 0;
         transition: 200ms all linear;
       }
+      .inputMove {
+        flex: 3;
+        opacity: 1;
+        transition: 200ms all linear;
+      }
 
       li:hover {
         background-color: #eee;
       }
     }
   }
-
-
 }
 
 .create-post-form {
@@ -126,7 +127,5 @@
     color: white;
     font-size: 16px;
     font-family: "Baloo Bhai 2";
-
-
   }
 }
