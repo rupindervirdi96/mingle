@@ -1,50 +1,46 @@
 .contact {
-    display: grid;
-    grid-template-columns: 45px 1fr;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px 5px;
-    // border: 1px solid black;
-    flex: 40px 1;
+  display: grid;
+  grid-template-columns: 45px 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 5px;
+  // border: 1px solid black;
+  flex: 40px 1;
 
-    img {
-        height: 45px;
-        border-radius: 50%;
+  img {
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  .contact-info {
+    padding: 0px 5px;
+
+    .name {
+      font-size: 16px;
+      font-weight: 400;
     }
 
-    .contact-info {
-        padding: 0px 5px;
-
-        .name {
-            font-size: 16px;
-            font-weight: 400;
-        }
-
-        .name:hover {
-            text-decoration: underline;
-        }
-
-        .mutual {
-            font-size: 12px;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-
-            button {
-                background-color: #0077ff;
-                color: #fff;
-                border: none;
-                border-radius: 3px;
-                padding: 2px;
-                margin: 2px 3px 2px 0px;
-            }
-        }
-
+    .name:hover {
+      text-decoration: underline;
     }
 
+    .mutual {
+      font-size: 12px;
+    }
 
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
+      button {
+        background-color: #0077ff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 2px;
+        margin: 2px 3px 2px 0px;
+      }
+    }
+  }
 }

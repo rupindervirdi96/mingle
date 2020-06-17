@@ -6,6 +6,7 @@ import Info from "./Info/info.component";
 import { useSelector } from "react-redux";
 import edit from "../../assets/edit.png";
 import Edit from "../Edit/edit.component";
+import FriendsList from "./FriendsList/friendsList.component";
 
 const ProfilePage = ({ friendsProfile, profile }) => {
   const { posts, AnyUser } = useSelector((state) => ({
@@ -94,30 +95,30 @@ const ProfilePage = ({ friendsProfile, profile }) => {
               )}
             </div>
           </div>
-          <div className="userDescription">
-            {friendsProfile == null ? (
-              <div className="userDescription">
-                <h1>{profile.name}</h1>
-                <div>
-                  {profile.status}{" "}
-                  <img
-                    className="edit-status"
-                    height="15px"
-                    src={edit}
-                    alt=""
-                    onClick={() => {
-                      setClick(true);
-                    }}
-                  />{" "}
-                </div>
+          {/* <div className="userDescription"> */}
+          {friendsProfile == null ? (
+            <div className="userDescription">
+              <h1>{profile.name}</h1>
+              <div>
+                {profile.status}{" "}
+                <img
+                  className="edit-status"
+                  height="15px"
+                  src={edit}
+                  alt=""
+                  onClick={() => {
+                    setClick(true);
+                  }}
+                />{" "}
               </div>
-            ) : (
-              <div className="userDescription">
-                <h1>{friendsProfile.name}</h1>
-                <h5>{friendsProfile.status}</h5>
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="userDescription">
+              <h1>{friendsProfile.name}</h1>
+              <div>{friendsProfile.status}</div>
+            </div>
+          )}
+          {/* </div> */}
           <hr />
           <div className="tabs">
             <ul type="none">
@@ -126,10 +127,6 @@ const ProfilePage = ({ friendsProfile, profile }) => {
               <li>Photos</li>
               <li>Timeline</li>
             </ul>
-            {/* <div></div>
-            <ul type="none">
-              <li>Edit Profile</li>
-            </ul> */}
           </div>
         </div>
       </div>
@@ -141,6 +138,7 @@ const ProfilePage = ({ friendsProfile, profile }) => {
                 setClick2(true);
               }}
             />
+            {friendsProfile == null ? <FriendsList /> : ""}
           </div>
           <div className="right">
             {friendsProfile == null ? <CreatePost profile={profile} /> : ""}

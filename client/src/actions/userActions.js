@@ -34,7 +34,10 @@ export const register = (user) => async dispatch => {
         if (res.data.error) {
             alert(res.data.error)
         }
-        alert(res.data.msg)
+        else {
+
+            alert(res.data.msg)
+        }
         // console.log(res);
     } catch (error) {
         console.log(error.message);

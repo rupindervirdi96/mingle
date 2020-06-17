@@ -9,13 +9,15 @@
   text-align: center;
   grid-template-columns: 1fr 500px 1fr;
 
-  .Menu {}
+  .Menu {
+  }
 
   .feed-container {
     margin: 0px 0px;
   }
 
-  .contacts {}
+  .contacts {
+  }
 
   .optionss {
     position: fixed;
@@ -39,6 +41,11 @@
         padding: 5px;
         background-color: #fff;
         margin-top: 5px;
+        text-align: left;
+        border-radius: 15px;
+      }
+      li:hover {
+        background-color: #eee;
       }
     }
   }

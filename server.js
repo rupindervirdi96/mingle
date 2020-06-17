@@ -1,7 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
 var cors = require('cors');
-const { log } = require('console');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -18,7 +17,6 @@ app.use(cors())
 
 
 io.on('connection', (socket) => {
-    console.log("User Connected");
     socket.on('input chat message', async (data) => {
         try {
             const profile = await Profile.findOne({ user: data.userid });
@@ -41,7 +39,8 @@ io.on('connection', (socket) => {
             var data = {
                 id: friendsProfile._id.toString(), messages: room.messages
             }
-            socket.broadcast.emit('output chat message', data)
+            io.emit('output chat message', data)
+
         }
         catch (error) {
             res.json(error.message)

@@ -80,9 +80,9 @@ const Contacts = ({ status, contact, openProfile }) => {
               Add Friend
             </button>
           )}
-          <button onClick={deleteRequest} className="btnRemove">
+          {/* <button onClick={deleteRequest} className="btnRemove">
             Remove
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

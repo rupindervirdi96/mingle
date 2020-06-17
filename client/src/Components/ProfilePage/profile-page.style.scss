@@ -63,14 +63,13 @@
     .userDescription {
       text-align: center;
       padding: 25px 0px 10px 0px;
-
+      font-family: Montserrat, "sans-serif";
+      font-weight: bolder;
       div {
         text-transform: uppercase;
-        font-family: "Baloo Bhai 2";
         padding: 5px 8px;
         min-width: 100%;
         max-width: 100%;
-        font-weight: bolder;
         height: auto;
         position: relative;
         // display: flex;
@@ -81,13 +80,15 @@
           top: 50%;
           height: 20px;
           transform: translate(-100%, -50%);
-
         }
       }
-
-      h1 {
-        // font-family: Montserrat;
-        font-family: "Baloo Bhai 2";
+      div {
+        margin: 5px 0px;
+      }
+      h1,
+      div {
+        font-family: Montserrat, "sans-serif";
+        font-weight: bolder;
       }
     }
 

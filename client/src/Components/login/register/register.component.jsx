@@ -11,7 +11,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    birthdate: new Date(),
+    birthdate: "",
   });
 
   const dispatch = useDispatch();

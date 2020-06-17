@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ReactComponent as Emoji } from "../../../svg/emoji.svg";
 import cross from "../../../assets/cross.png";
 import "./chat.style.scss";
-import io, { Socket } from "socket.io-client";
+import io from "socket.io-client";
 import send from "../../../assets/send.png";
 import Message from "./message.component";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,43 +10,49 @@ import {
   sendMessage,
   getMessages,
   removeChat,
+  saveMessage,
 } from "../../../actions/messageActions";
 
-let socket = Socket;
 function Chat({ chat }) {
   const { profile } = useSelector((state) => ({
     profile: state.users.profile,
   }));
 
-  const [text, setText] = useState();
+  const [text, setText] = useState("");
 
   const dispatch = useDispatch();
 
   const sendMessages = async (e) => {
     e.preventDefault();
-    const data = {
+    let data = {
       id: chat.friend.id,
       text: text,
       userid: profile.user.toString(),
     };
 
     // console.log(data);
-    await dispatch(sendMessage(data));
-    document.querySelector(".messageText").value = "";
+    if (!(data.text == "")) {
+      await dispatch(saveMessage(data));
+      document.querySelector(".messageText").value = "";
+    }
     // dispatch(getMessages(chat.friend.id));
   };
 
   useEffect(() => {
+    io("http://localhost:5000").on("output chat message", async (data) => {
+      alert("here");
+      await dispatch(sendMessage(data));
+      await dispatch(sendMessage(data));
+      // let dataa = {
+      //   id: chat.friend.id,
+      //   text: text,
+      //   userid: profile.user.toString(),
+      // };
+    });
     document
       .querySelector(".messagesWindow")
       .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
     document.querySelector(".messageText").focus();
-    const data = {
-      id: chat.friend.id,
-      text: text,
-      userid: profile.user.toString(),
-    };
-    // dispatch(getMessages(data));
   }, []);
   return (
     <div className="Chat-Container">
@@ -56,7 +62,7 @@ function Chat({ chat }) {
             className="profilePic"
             style={{ backgroundImage: `url(${chat.friend.profPic})` }}
           ></div>
-          <span>{chat.friend.name}</span>
+          <span>{chat.friend.name.split(" ")[0]}</span>
           <div
             onClick={() => {
               dispatch(removeChat(chat.friend.id));
