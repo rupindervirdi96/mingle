@@ -15,6 +15,14 @@ app.use(express.json({ extended: false }));
 app.use(cors())
 
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
+
+
 
 io.on('connection', (socket) => {
     socket.on('input chat message', async (data) => {

@@ -2,6 +2,7 @@
   "name": "facebook-clone",
   "version": "1.0.0",
   "description": "facebook clone college project",
+  "main": "server.js",
   "engines": {
     "node": "10.16.3",
     "npm": "6.13.6"
@@ -10,7 +11,8 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server \" \"npm run client\""
+    "dev": "concurrently \"npm run server \" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
