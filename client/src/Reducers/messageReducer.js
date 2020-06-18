@@ -16,8 +16,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 chatsOpen: state.chatsOpen.map(chat => {
-                    // console.log(chat.friend.id, action.data.id);
-
                     if (chat.friend.id === action.data.id) {
                         return { ...chat, messages: action.data.messages }
                     }
