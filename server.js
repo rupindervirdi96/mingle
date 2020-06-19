@@ -11,6 +11,7 @@ const io = require('socket.io')(server);
 
 connectDB();
 
+
 app.use(express.json({ extended: false }));
 app.use(cors())
 
