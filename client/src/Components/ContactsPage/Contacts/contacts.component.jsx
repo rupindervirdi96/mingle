@@ -7,9 +7,7 @@ const Contacts = ({ status, contact, openProfile }) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = axios.put(
-      `http://localhost:5000/profile/update/friends/accept/${contact.id}`
-    );
+    const res = axios.put(`/profile/update/friends/accept/${contact.id}`);
     window.location.reload();
     // console.log(res);
     delete axios.defaults.headers.common["x-auth-token"];
@@ -20,9 +18,7 @@ const Contacts = ({ status, contact, openProfile }) => {
       sessionStorage.getItem("auth")
     );
 
-    const res = axios.put(
-      `http://localhost:5000/profile/update/friends/request/${contact._id}`
-    );
+    const res = axios.put(`/profile/update/friends/request/${contact._id}`);
     window.location.reload();
     delete axios.defaults.headers.common["x-auth-token"];
   };

@@ -18,7 +18,6 @@ router.post('/', async (req, res) => {
         }
         if (password.length < 8) {
             return res.json({ error: "Password should be more than 8 character" });
-
         }
 
         const user = new User({ email, password });
