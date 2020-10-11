@@ -40,7 +40,6 @@ function Chat({ chat }) {
 
   useEffect(() => {
     io("").on("output chat message", async (data) => {
-      alert("here");
       await dispatch(sendMessage(data));
       await dispatch(sendMessage(data));
       // let dataa = {
