@@ -9,10 +9,6 @@ const Login = () => {
     password: "",
   });
 
-  // const { auth, currentUser } = useSelector((state) => ({
-  //   currentUser: state.users.currentUser,
-  // }));
-
   const dispatch = useDispatch();
 
   const onChangeEmail = (e) => {
@@ -35,7 +31,7 @@ const Login = () => {
     <div className="login-component">
       <form action="" onSubmit={onSubmit}>
         <div className="email">
-          <span>username</span>
+          <span>email</span>
           <input type="text" onChange={onChangeEmail} placeholder="username" />
         </div>
         <div className="password">

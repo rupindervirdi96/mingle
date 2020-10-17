@@ -74,7 +74,10 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post("/profile/info/change", data);
+    const res = await axios.post(
+      "http://localhost:5000/profile/info/change",
+      data
+    );
   };
   const updateWork = async (e) => {
     e.preventDefault();
@@ -90,7 +93,10 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post("/profile/info/change", data);
+    const res = await axios.post(
+      "http://localhost:5000/profile/info/change",
+      data
+    );
   };
   const updateEducation = async (e) => {
     e.preventDefault();
@@ -106,7 +112,10 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post("/profile/info/change", data);
+    const res = await axios.post(
+      "http://localhost:5000/profile/info/change",
+      data
+    );
   };
   const updateLocation = async (e) => {
     e.preventDefault();
@@ -119,7 +128,10 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post("/profile/info/change", data);
+    const res = await axios.post(
+      "http://localhost:5000/profile/info/change",
+      data
+    );
   };
 
   return (
@@ -282,10 +294,13 @@ function Edit({ onChange, type }) {
         </div>
       ) : type == "profilePic" ? (
         <div className="editProfilePhoto">
-          <h2>Update Profile Pic</h2>
+          <h2>Update Profile Photo</h2>
           <input
             onChange={updateProfilePic}
             type="text"
+            onLoad={(e) => {
+              e.focus();
+            }}
             placeholder="Enter the url"
           />
           <button className="btnUpdate" onClick={saveProfilePic}>
@@ -294,7 +309,7 @@ function Edit({ onChange, type }) {
         </div>
       ) : type == "coverPic" ? (
         <div className="editProfilePhoto">
-          <h2>Update Cover Pic</h2>
+          <h2>Update Cover Photo</h2>
           <input
             onChange={updateCoverPic}
             type="text"

@@ -27,8 +27,8 @@ const ContactsPage = ({ profile }) => {
   return (
     <div className="contacts-page">
       <div className="contacts">
-        <h1 style={{ paddingLeft: "8px" }}>Friends</h1>
-        <h3 style={{ paddingLeft: "8px" }}>{requests.length} Friend Request</h3>
+        <h1 style={{ padding: "8px" }}>Friends</h1>
+        <h3 style={{ padding: "8px" }}>{requests.length} Friend Request</h3>
         {requests.length > 0 ? (
           requests.map((request, key) => {
             if (request.status === "received") {
@@ -46,9 +46,9 @@ const ContactsPage = ({ profile }) => {
             }
           })
         ) : (
-          <span style={{ paddingLeft: "8px" }}>No new requests for you.</span>
+          <span style={{ padding: "8px" }}>No new requests for you.</span>
         )}
-        <h3 style={{ paddingLeft: "8px" }}>People you may know</h3>
+        <h3 style={{ padding: "8px" }}>People you may know</h3>
         {suggestions.map((contact, key) => {
           return (
             <Contacts

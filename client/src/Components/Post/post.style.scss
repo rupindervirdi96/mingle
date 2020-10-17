@@ -1,5 +1,5 @@
 * {
-  font-family: "Baloo Bhai 2";
+  font-family: "Roboto";
 }
 
 hr {
@@ -15,14 +15,18 @@ hr {
   border-radius: 10px;
   background-color: #fff;
   margin: 10px 0px;
-  padding: 15px;
-  padding-bottom: 0px;
+  padding: 10px 20px;
+  // padding-bottom: 0px;
   box-shadow: 0px 2px 5px rgba($color: #000000, $alpha: 0.2);
 
   .creator {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding: 10px 0px;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+// box-shadow: 0px 1px 4px 1px rgba($color: #000000, $alpha: 0.2);
 
     img {
       // display: block;
@@ -37,7 +41,9 @@ hr {
 
     span {
       font-size: 22px;
+      text-align: left;
     }
+
   }
 
   .content {
@@ -45,37 +51,40 @@ hr {
 
     .text {
       text-align: left;
-      margin-left: 12px;
+      margin-bottom: 5px;
     }
-
+    
     .image {
       display: flex;
       align-items: center;
       justify-content: center;
-
+      
       img {
         width: 100%;
       }
     }
   }
-
+  
   .likeComment {
     display: flex;
     flex-direction: column;
     padding: 0px;
-
+    // margin-top: 10px;
+    
     .likeCommentCounter {
       display: flex;
       flex: 1;
+      align-items: bottom;
+      justify-content: center;
 
       .nbLikes {
         flex: 1;
         border-radius: 15px;
         display: flex;
-        align-items: top;
-        justify-content: center;
+        align-items: center;
+        justify-content: flex-start;
         span {
-          font-size: 30px;
+          font-size: 20px;
           color: #0077ff;
         }
       }

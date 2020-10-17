@@ -47,7 +47,7 @@
     .messagesWindow {
       padding: 5px 15px 5px 10px;
       // margin: 5px 0px;
-      background-color: #fff;
+      background: #000;
       overflow-y: scroll;
 
       .message {
@@ -61,16 +61,16 @@
 
         h4 {
           display: inline-block;
-          background-color: rgba($color: #0077ff, $alpha: 0.8);
+          background-color:rgb(238, 238, 238);
           word-wrap: break-word;
           width: 115px;
           max-width: 115px;
-          padding: 3px 5px;
-          color: white;
-          font-size: 12px;
+          padding: 5px 5px;
+          color: #004fa9;
+          font-size: 14px;
           border-radius: 0px 5px 5px 5px;
           text-align: left;
-          font-weight: normal;
+          font-weight: bold;
         }
       }
 
@@ -80,14 +80,14 @@
         h4 {
           display: inline-block;
           width: 115px;
-          background-color: rgba($color: #0077ff, $alpha: 0.8);
+          background-color: rgba($color: #004faa, $alpha: 0.8);
           word-wrap: break-word;
           max-width: 115px;
-          padding: 3px 5px;
+          padding: 5px 5px;
           color: white;
-          font-size: 12px;
+          font-size: 14px;
           border-radius: 5px 0px 5px 5px;
-          text-align: right;
+          text-align: left;
           font-weight: normal;
         }
       }
@@ -106,7 +106,7 @@
       border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
 
       input {
-        padding: 3px 5px;
+        padding: 6px 5px;
         border-radius: 8px;
         margin: 0px 5px;
         border: 1px solid rgba($color: #fff, $alpha: 0.6);

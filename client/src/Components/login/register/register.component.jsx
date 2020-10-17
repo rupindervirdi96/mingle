@@ -57,15 +57,13 @@ const Register = () => {
           <h1>Create a New Account</h1>
           <h3>It's quick and easy.</h3>
           <form action="" onSubmit={onSubmit}>
-            {/* <div className="name"> */}
             <input
               type="text"
               placeholder="Name"
               onChange={onChangeName}
               required
             />
-            {/* </div> */}
-            <input
+              <input
               type="email"
               placeholder="Email"
               onChange={onChangeEmail}

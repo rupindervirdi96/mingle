@@ -13,7 +13,7 @@ function Friend({ prof }) {
         className="name"
         style={{ fontSize: "16px", textAlign: "center", width: "100%" }}
       >
-        {prof.name}
+        {prof.name.split(" ")[0]}
       </span>
     </div>
   );

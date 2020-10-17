@@ -27,15 +27,6 @@ const MainTabs = ({ profile }) => {
         onClick={onClickHam}
       ></div>
       <ul className="dropDownList" type="none">
-        <li
-          style={{
-            backgroundColor: "#00000000",
-            color: "#fff",
-            textTransform: "uppercase",
-          }}
-        >
-          HEY, {profile.name}
-        </li>
         <Link to="/home">
           <li
             onClick={() => {
@@ -70,7 +61,7 @@ const MainTabs = ({ profile }) => {
       </ul>
       <ul className="tabs-list" type="none">
         <Link to="/home">
-          <li>
+          <li className="homeIcon">
             <HomeIcon />
           </li>
         </Link>

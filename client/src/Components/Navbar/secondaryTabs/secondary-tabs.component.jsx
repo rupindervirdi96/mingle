@@ -1,15 +1,18 @@
 import React from "react";
 import "./secondary-tabs.style.scss";
-import more from "../../../assets/bottom arrow.png";
+import settings from "../../../assets/settings.svg";
 import { ReactComponent as Messenger } from "../../../svg/messenger.svg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const SecondaryTabs = ({ name }) => {
   return (
     <div className="Secondary-Tabs">
       <Link to="/profile">
         <div className="user-profile">
-          <span className="user-name">Welcome, {name}</span>
+          <span className="user-name">
+            Welcome, {name && name.split(" ")[0]}
+          </span>
         </div>
       </Link>
       <ul type="none">
@@ -58,7 +61,7 @@ const SecondaryTabs = ({ name }) => {
             }
           }}
         >
-          <img src={more} height="16px" alt="" />
+          <img onClick={() => {}} src={settings} height="26px" alt="" />
         </li>
       </ul>
     </div>

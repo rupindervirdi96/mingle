@@ -29,12 +29,13 @@
       background-position: center;
       border-radius: 0px 0px 10px 10px;
       position: relative;
-
-      img {
-        height: 45px;
+      
+      .editCoverPhoto {
+        // height: 45px;
         position: absolute;
         top: 98%;
         left: 98%;
+        fill: #0077ff;
         transform: translate(-100%, -100%);
       }
 
@@ -49,10 +50,10 @@
         background-size: cover;
         background-position: center;
         border-radius: 50%;
-
-        img {
-          height: 35px;
+        
+        .editProfilePhoto {
           position: absolute;
+          fill: #0077ff;
           top: 80%;
           left: 80%;
           transform: translate(-50%, -50%);
@@ -74,11 +75,12 @@
         position: relative;
         // display: flex;
 
-        img {
+        .editStatus {
           position: absolute;
           left: 100%;
           top: 50%;
-          height: 20px;
+          height: 22px;
+          fill: #0077ff;
           transform: translate(-100%, -50%);
         }
       }
@@ -112,7 +114,7 @@
           margin: 0px 5px;
           border: 2px solid #00000000;
           font-weight: 400;
-          font-family: "Baloo Bhai 2";
+          font-family: "Roboto";
         }
 
         li:nth-child(1) {

@@ -47,6 +47,9 @@ const Post = ({ post }) => {
           ></div>
         )}
         <span>{post.name}</span>
+        <span style={{ fontSize: "16px", color: "#777" }}>
+          {post.date.split("T")[0]}
+        </span>
       </div>
 
       <div className="content">
@@ -59,12 +62,13 @@ const Post = ({ post }) => {
         <div className="likeCommentCounter">
           <span className="nbLikes">
             <span>{post.likes.length}</span>
-            <img height="45px" src={like} alt="" />
+            <img height="30px" src={like} alt="" />
           </span>
         </div>
         <hr />
         <ul type="none">
           <li onClick={LikePost}>LIKE</li>
+          <li>COMMENT</li>
         </ul>
       </div>
     </div>

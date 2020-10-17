@@ -11,7 +11,7 @@
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-family: "Baloo Bhai 2";
+    font-family: "Roboto";
 
     .AppDescription {
       margin: 0px 0px 0px 0px;
@@ -38,7 +38,7 @@
         width: 50%;
 
         input {
-          font-family: "Baloo Bhai 2";
+          font-family: "Roboto";
           margin: 10px 10px 10px 0;
           padding: 8px;
           border-radius: 4px;
@@ -46,7 +46,7 @@
         }
 
         input[type="submit"] {
-          font-family: "Baloo Bhai 2";
+          font-family: "Roboto";
           margin: 20px 10px 10px 0;
           padding: 5px;
           border-radius: 4px;

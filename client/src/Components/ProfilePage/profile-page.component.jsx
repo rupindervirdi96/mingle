@@ -4,7 +4,7 @@ import CreatePost from "../../Components/CreatePost/create-post.component";
 import Post from "../Post/post.component";
 import Info from "./Info/info.component";
 import { useSelector } from "react-redux";
-import edit from "../../assets/edit.png";
+import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 import Edit from "../Edit/edit.component";
 import FriendsList from "./FriendsList/friendsList.component";
 
@@ -62,8 +62,9 @@ const ProfilePage = ({ friendsProfile, profile }) => {
             className="cover"
           >
             {friendsProfile == null ? (
-              <img
-                src={edit}
+              <EditIcon
+                color="#fff"
+                className="editCoverPhoto"
                 onClick={() => {
                   setClick4(true);
                 }}
@@ -83,8 +84,8 @@ const ProfilePage = ({ friendsProfile, profile }) => {
               className="profile-photo"
             >
               {friendsProfile == null ? (
-                <img
-                  src={edit}
+                <EditIcon
+                  className="editProfilePhoto"
                   onClick={() => {
                     setClick3(true);
                   }}
@@ -95,16 +96,14 @@ const ProfilePage = ({ friendsProfile, profile }) => {
               )}
             </div>
           </div>
-          {/* <div className="userDescription"> */}
           {friendsProfile == null ? (
             <div className="userDescription">
               <h1>{profile.name}</h1>
               <div>
                 {profile.status}{" "}
-                <img
-                  className="edit-status"
+                <EditIcon
+                  className="edit-status editStatus"
                   height="15px"
-                  src={edit}
                   alt=""
                   onClick={() => {
                     setClick(true);
@@ -118,7 +117,6 @@ const ProfilePage = ({ friendsProfile, profile }) => {
               <div>{friendsProfile.status}</div>
             </div>
           )}
-          {/* </div> */}
           <hr />
           <div className="tabs">
             <ul type="none">

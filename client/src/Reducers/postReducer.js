@@ -4,7 +4,7 @@ import { GET_MY_POSTS, LIKE_POST, GET_POSTS_FOR_ANY_USER, GET_FRIENDS_POSTS } fr
 const initialState = {
     MyPosts: [],
     FriendsPost: [],
-    UserPosts: []
+    UserPosts: [],
 }
 
 export default function (state = initialState, { type, data }) {

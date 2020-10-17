@@ -21,16 +21,20 @@
 
   .optionss {
     position: fixed;
-    padding: 5px;
+    // padding: 5px;
     left: 100%;
     transform: translateX(0%);
     width: 200px;
     transition: 300ms all linear;
-    background-color: #fff;
+    background-color: #eee;
     box-shadow: -1px 0px 4px 0px rgba($color: #000000, $alpha: 0.1);
 
     h1 {
       text-align: left;
+      font-weight: normal;
+      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+      padding: 8px;
+
     }
 
     ul {
@@ -38,21 +42,21 @@
       flex-direction: column;
 
       li {
-        padding: 5px;
-        background-color: #fff;
+        padding: 8px;
+        background-color: #eee;
         margin-top: 5px;
         text-align: left;
-        border-radius: 15px;
+        border-radius: 5px;
       }
       li:hover {
-        background-color: #eee;
+        background-color: #fff;
       }
     }
   }
 
   .revealOptions {
     transform: translateX(-100%);
-    transition: 300ms all linear;
+    transition: 150ms all linear;
   }
 }
 

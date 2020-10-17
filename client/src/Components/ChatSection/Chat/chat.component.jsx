@@ -39,15 +39,10 @@ function Chat({ chat }) {
   };
 
   useEffect(() => {
-    io("").on("output chat message", async (data) => {
-      alert("here");
+    io("http://localhost:5000").on("output chat message", async (data) => {
+      // alert("here");
       await dispatch(sendMessage(data));
-      await dispatch(sendMessage(data));
-      // let dataa = {
-      //   id: chat.friend.id,
-      //   text: text,
-      //   userid: profile.user.toString(),
-      // };
+      // await dispatch(sendMessage(data));
     });
     document
       .querySelector(".messagesWindow")
@@ -68,8 +63,8 @@ function Chat({ chat }) {
               dispatch(removeChat(chat.friend.id));
             }}
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
               backgroundImage: `url(${cross})`,
               backgroundPosition: "center",
               backgroundSize: "center",

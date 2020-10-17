@@ -16,18 +16,17 @@
 
     height: auto;
     .friend {
-      // height: 120px;
-      // width: 100px;
-
-      display: inline;
+      display: inline-block;
       padding-bottom: 10px;
+      margin: 8px;
       .photo {
         background-position: center;
         background-size: cover;
         height: 100px;
-        width: auto;
+        width: 100px;
       }
       span {
+        width: min-content;
       }
     }
   }

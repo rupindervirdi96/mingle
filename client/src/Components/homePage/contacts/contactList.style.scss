@@ -13,19 +13,19 @@
 
     h1 {
       text-align: left;
-
-      padding-left: 9px;
+      padding: 8px;
+      font-weight: normal;
     }
   }
 }
 @media (max-width: "1000px") {
   .contactss {
     transform: translateX(0%);
-    transition: 200ms all linear;
+    transition: 150ms all linear;
   }
 
   .appear {
     transform: translateX(-100%);
-    transition: 200ms all linear;
+    transition: 150ms all linear;
   }
 }
