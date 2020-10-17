@@ -6,7 +6,7 @@ import axios from "axios";
 export const loginUser = (loginInfo) => async dispatch => {
     // 
     try {
-        const res = await axios.post("http://localhost:5000/auth/", loginInfo)
+        const res = await axios.post("/auth/", loginInfo)
         sessionStorage.setItem('auth', JSON.stringify(res.data.token));
         window.location = "/home";
     } catch (error) {
@@ -26,7 +26,7 @@ export const register = (user) => async dispatch => {
 
         const body = JSON.stringify(user);
 
-        res = await axios.post("http://localhost:5000/users/",
+        res = await axios.post("/users/",
             body,
             config
         );
@@ -47,7 +47,7 @@ export const setUser = auth => async dispatch => {
     try {
 
         axios.defaults.headers.common['x-auth-token'] = auth;
-        const res = await axios.get('http://localhost:5000/auth/')
+        const res = await axios.get('/auth/')
         dispatch(
             {
                 type: SET_USER,
@@ -63,7 +63,7 @@ export const setUser = auth => async dispatch => {
 export const getProfile = (id) => async dispatch => {
     try {
         axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-        const res = await axios.get(`http://localhost:5000/profile/${id}`);
+        const res = await axios.get(`/profile/${id}`);
         dispatch(
             {
                 type: SET_FRIEND,
@@ -79,7 +79,7 @@ export const getProfile = (id) => async dispatch => {
 export const changeStatus = (newStat) => async dispatch => {
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
     console.log("HEllo");
-    const res = await axios.put("http://localhost:5000/profile/update/status", { status: newStat });
+    const res = await axios.put("/profile/update/status", { status: newStat });
     console.log(res);
 
     dispatch(

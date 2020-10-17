@@ -6,7 +6,7 @@ export const getMyPosts = () => async dispatch => {
     try {
 
         axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-        const res = await axios.get("http://localhost:5000/posts/")
+        const res = await axios.get("/posts/")
         const data = res.data.reverse();
         dispatch(
             {
@@ -24,7 +24,7 @@ export const getMyPosts = () => async dispatch => {
 export const getPostsForAnyUser = (id) => async dispatch => {
 
     try {
-        const res = await axios.get(`http://localhost:5000/posts/getpost/${id}`)
+        const res = await axios.get(`/posts/getpost/${id}`)
         const data = res.data.reverse();
         dispatch(
             {
@@ -42,7 +42,7 @@ export const getAllPostsForFriends = () => async dispatch => {
     try {
 
         axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-        const res = await axios.get(`http://localhost:5000/posts/friends`)
+        const res = await axios.get(`/posts/friends`)
         const data = res.data.reverse();
         dispatch(
             {
@@ -59,7 +59,7 @@ export const getAllPostsForFriends = () => async dispatch => {
 export const likePost = (id) => async dispatch => {
     try {
         axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-        const res = await axios.post(`http://localhost:5000/posts/like/${id}`);
+        const res = await axios.post(`/posts/like/${id}`);
         console.log(res);
     } catch (error) {
         console.log(error.message);
@@ -69,7 +69,7 @@ export const likePost = (id) => async dispatch => {
 export const addPost = (text, image) => async dispatch => {
     try {
         axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-        const res = await axios.post(`http://localhost:5000/posts/`, { text, image });
+        const res = await axios.post(`/posts/`, { text, image });
         console.log(res);
         window.location.reload();
     } catch (error) {

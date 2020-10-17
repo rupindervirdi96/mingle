@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getSuggestions = () => async dispatch => {
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    const res = await axios.get("http://localhost:5000/profile/update/suggestions");
+    const res = await axios.get("/profile/update/suggestions");
 
     dispatch(
         {
@@ -16,7 +16,7 @@ export const getSuggestions = () => async dispatch => {
 
 export const getAllFriends = () => async dispatch => {
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    const res = await axios.get("http://localhost:5000/profile/friends/get");
+    const res = await axios.get("/profile/friends/get");
     dispatch(
         {
             type: GET_FRIENDS,
@@ -27,7 +27,7 @@ export const getAllFriends = () => async dispatch => {
 }
 export const getAllRequests = () => async dispatch => {
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    const res = await axios.get("http://localhost:5000/profile/requests/get");
+    const res = await axios.get("/profile/requests/get");
 
     dispatch(
         {
@@ -41,7 +41,7 @@ export const getAllRequests = () => async dispatch => {
 export const getInfo = () => async dispatch => {
 
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    const res = await axios.get("http://localhost:5000/profile/info/getinfo");
+    const res = await axios.get("/profile/info/getinfo");
     dispatch(
         {
             type: GET_INFO,
@@ -58,7 +58,7 @@ export const setProfilePic = (photo) => async dispatch => {
     }
 
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    await axios.post("http://localhost:5000/profile/photo/prof", data);
+    await axios.post("/profile/photo/prof", data);
 
 }
 
@@ -67,7 +67,7 @@ export const setCoverPic = (photo) => async dispatch => {
         pic: photo,
     }
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    await axios.post("http://localhost:5000/profile/photo/cover", data);
+    await axios.post("/profile/photo/cover", data);
 
 }
 
