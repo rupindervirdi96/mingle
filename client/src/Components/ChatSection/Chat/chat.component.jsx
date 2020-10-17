@@ -39,8 +39,7 @@ function Chat({ chat }) {
   };
 
   useEffect(() => {
-    io("http://localhost:5000").on("output chat message", async (data) => {
-      // alert("here");
+    io("").on("output chat message", async (data) => {
       await dispatch(sendMessage(data));
       // await dispatch(sendMessage(data));
     });
