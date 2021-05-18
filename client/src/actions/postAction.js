@@ -24,7 +24,7 @@ export const getMyPosts = () => async (dispatch) => {
 
 export const getPostsForAnyUser = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:5000/posts/getpost/${id}`);
+    const res = await axios.get(` /posts/getpost/${id}`);
     const data = res.data.reverse();
     dispatch({
       type: GET_POSTS_FOR_ANY_USER,
@@ -40,7 +40,7 @@ export const getAllPostsForFriends = () => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.get(`http://localhost:5000/posts/friends`);
+    const res = await axios.get(` /posts/friends`);
     const data = res.data.reverse();
     dispatch({
       type: GET_FRIENDS_POSTS,
@@ -56,7 +56,7 @@ export const likePost = (id) => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.post(`http://localhost:5000/posts/like/${id}`);
+    const res = await axios.post(` /posts/like/${id}`);
     console.log(res);
   } catch (error) {
     console.log(error.message);
@@ -68,7 +68,7 @@ export const addPost = (text, image) => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.post(`http://localhost:5000/posts/`, {
+    const res = await axios.post(` /posts/`, {
       text,
       image,
     });
