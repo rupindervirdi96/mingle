@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ReactComponent as Emoji } from "../../../svg/emoji.svg";
 import cross from "../../../assets/cross.png";
 import "./chat.style.scss";
@@ -18,10 +18,11 @@ function Chat({ chat }) {
     profile: state.users.profile,
   }));
 
+  const [currChat, UpdateCurrChat] = useState(chat);
+  const [yourID, setYourID] = useState();
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
-
   const sendMessages = async (e) => {
     e.preventDefault();
     let data = {
@@ -29,20 +30,26 @@ function Chat({ chat }) {
       text: text,
       userid: profile.user.toString(),
     };
-
-    // console.log(data);
     if (!(data.text == "")) {
-      await dispatch(saveMessage(data));
+      io("http://localhost:5000").emit("send message", data);
       document.querySelector(".messageText").value = "";
     }
-    // dispatch(getMessages(chat.friend.id));
   };
 
   useEffect(() => {
-    io("").on("output chat message", async (data) => {
-      await dispatch(sendMessage(data));
-      // await dispatch(sendMessage(data));
-    });
+    io("http://localhost:5000").on(
+      "output chat message",
+      async ({ message, data }) => {
+        console.log(message);
+        console.log(data);
+        await UpdateCurrChat(data);
+
+        document
+          .querySelector(".messagesWindow")
+          .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
+        document.querySelector(".messageText").focus();
+      }
+    );
     document
       .querySelector(".messagesWindow")
       .scrollTo(0, document.querySelector(".messagesWindow").scrollHeight);
@@ -71,7 +78,7 @@ function Chat({ chat }) {
           ></div>
         </div>
         <div className="messagesWindow">
-          {chat.messages.map((message, key) => {
+          {currChat.messages.map((message, key) => {
             if (message.sender.toString() == profile._id.toString()) {
               return <Message key={key} align="right" text={message.text} />;
             } else {

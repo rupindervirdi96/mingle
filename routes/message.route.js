@@ -33,12 +33,6 @@ router.post('/', auth, async (req, res) => {
         res.json(error.message)
     }
 })
-/*
-Friends profile id is required and text message is required.
-If
-*/
-
-
 
 
 //route   messages/
@@ -89,8 +83,6 @@ router.get("/:id", auth, async (req, res) => {
     } catch (error) {
         res.json(error.message);
     }
-
-
 })
 
 

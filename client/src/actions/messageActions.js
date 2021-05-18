@@ -12,7 +12,7 @@ import io from "socket.io-client";
 
 export const getMessages = (chatId) => async dispatch => {
     axios.defaults.headers.common['x-auth-token'] = JSON.parse(sessionStorage.getItem('auth'));
-    var res = await axios.get(`/messages/${chatId}`)
+    var res = await axios.get(`http://localhost:5000/messages/${chatId}`)
 
     dispatch({
         type: NEW_CHAT,
@@ -22,16 +22,12 @@ export const getMessages = (chatId) => async dispatch => {
     )
 }
 
-export const saveMessage = (data) => async dispatch => {
+// export const saveMessage = (data) => async dispatch => {
 
-    io("").emit("input chat message", data);
-
-
-
-}
+//     io("http://localhost:5000").emit("input chat message", data);
+// }
 
 export const sendMessage = (data) => async dispatch => {
-
 
     dispatch({
         type: NEW_MESSAGE,

@@ -17,8 +17,8 @@ app.use(cors())
 
 
 
-io.on('connection', (socket) => {
-    socket.on('input chat message', async (data) => {
+io.on('connection', socket => {
+    socket.on('send message', async (data) => {
         try {
             const profile = await Profile.findOne({ user: data.userid });
             const friendsProfile = await Profile.findOne({ _id: data.id })
@@ -40,15 +40,13 @@ io.on('connection', (socket) => {
             var data = {
                 id: friendsProfile._id.toString(), messages: room.messages
             }
-            io.emit('output chat message', data)
+            io.emit('output chat message', { message, data })
 
         }
         catch (error) {
             res.json(error.message)
         }
-    }
-    )
-
+    });
 });
 
 
