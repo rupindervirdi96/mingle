@@ -3,7 +3,6 @@ import "./secondary-tabs.style.scss";
 import settings from "../../../assets/settings.svg";
 import { ReactComponent as Messenger } from "../../../svg/messenger.svg";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 const SecondaryTabs = ({ name }) => {
   return (
@@ -42,14 +41,13 @@ const SecondaryTabs = ({ name }) => {
           }}
         >
           <Messenger />
-          {/* <div className="create-menu"></div> */}
         </li>
         <li
           className="more-options"
           onClick={() => {
-            if (window.location.pathname == "/home") {
+            if (window.location.pathname === "/home") {
               let options = document.querySelector(".optionss");
-              var list = document.querySelector(".contactss");
+              let list = document.querySelector(".contactss");
               if (options.classList.contains("revealOptions")) {
                 options.classList.remove("revealOptions");
               } else {

@@ -13,7 +13,7 @@ const UserButton = ({ profile }) => {
     var Open = false;
     const id = prof.id.toString();
     chatsOpen.forEach((chat) => {
-      if (chat.friend.id == id) {
+      if (chat.friend.id === id) {
         Open = true;
       }
     });

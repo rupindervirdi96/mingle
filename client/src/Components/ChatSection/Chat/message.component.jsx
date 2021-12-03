@@ -1,7 +1,7 @@
 import React from "react";
 
 const Message = ({ align, text }) => {
-  return align == "left" ? (
+  return align === "left" ? (
     <div className="message left">
       <h4>{text}</h4>
     </div>

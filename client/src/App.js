@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import "./App.scss";
-import Login from "./Components/login/login.page"
+import Login from "./Components/login/login.page";
 import Homepage from "./Components/homePage/homePage.component";
 import Profile from "./Components/ProfilePage/profile-page.component";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/navbar.component";
-import ContactsPage from "./Components/ContactsPage/contacts.page"
+import ContactsPage from "./Components/ContactsPage/contacts.page";
 import ChatSection from "./Components/ChatSection/chatSection.component";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./actions/userActions";
 import { getMyPosts, getAllPostsForFriends } from "./actions/postAction";
-import { getAllFriends, getAllRequests, getInfo } from "./actions/profileActions";
-
-
-
+import {
+  getAllFriends,
+  getAllRequests,
+  getInfo,
+} from "./actions/profileActions";
 
 function App() {
   const { profile } = useSelector((state) => ({
@@ -32,7 +33,6 @@ function App() {
   }, [dispatch]);
 
   return (
-
     <div className="App">
       <Router>
         <Route exact path="/">
@@ -51,8 +51,7 @@ function App() {
         </Route>
       </Router>
     </div>
-  )
+  );
 }
 
 export default App;
-

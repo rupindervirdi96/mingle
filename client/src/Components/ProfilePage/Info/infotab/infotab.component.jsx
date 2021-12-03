@@ -4,7 +4,7 @@ import "./infotab.style.scss";
 function InfoTab({ type, info }) {
   return (
     <div className="infoTab">
-      {type == "work" ? (
+      {type === "work" ? (
         <div>
           <img
             src="https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/M0Wls5DHC-A.png"
@@ -15,7 +15,7 @@ function InfoTab({ type, info }) {
             Worked at {info.company},{info.location}
           </span>
         </div>
-      ) : type == "education" ? (
+      ) : type === "education" ? (
         <div>
           <img
             src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/id4jdGYPaIP.png"
@@ -26,7 +26,7 @@ function InfoTab({ type, info }) {
             Studies at {info.institute} | {info.location}
           </span>
         </div>
-      ) : type == "location" ? (
+      ) : type === "location" ? (
         <div>
           <img
             src="https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/X_t0JnueVu-.png"
@@ -37,7 +37,7 @@ function InfoTab({ type, info }) {
             Lives in {info.city},{info.country}
           </span>
         </div>
-      ) : type == "relation" ? (
+      ) : type === "relation" ? (
         <div>
           <img
             src="https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/exk40A1bzjc.png"

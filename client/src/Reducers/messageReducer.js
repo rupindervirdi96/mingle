@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
                 }),
             }
         case REMOVE_CHAT:
-            return { ...state, chatsOpen: state.chatsOpen.filter(chat => chat.friend.id != action.data) }
+            return { ...state, chatsOpen: state.chatsOpen.filter(chat => chat.friend.id !== action.data) }
         default:
             return state;
     }
