@@ -25,7 +25,7 @@ io.on('connection', socket => {
             var message = new Message({ sender: profile._id, text: data.text });
             var roomId;
             profile.chats.forEach((chat) => {
-                if (chat.friendsProfile == friendsProfile._id.toString()) {
+                if (chat.friendsProfile === friendsProfile._id.toString()) {
                     roomId = chat.roomId;
                 }
             })

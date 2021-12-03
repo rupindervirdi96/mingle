@@ -1,6 +1,5 @@
 import {
   GET_MY_POSTS,
-  LIKE_POST,
   GET_POSTS_FOR_ANY_USER,
   GET_FRIENDS_POSTS,
 } from "./types";

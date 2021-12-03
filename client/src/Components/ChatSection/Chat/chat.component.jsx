@@ -6,12 +6,7 @@ import io from "socket.io-client";
 import send from "../../../assets/send.png";
 import Message from "./message.component";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  sendMessage,
-  getMessages,
-  removeChat,
-  saveMessage,
-} from "../../../actions/messageActions";
+import { removeChat } from "../../../actions/messageActions";
 
 function Chat({ chat }) {
   const { profile } = useSelector((state) => ({
@@ -19,7 +14,6 @@ function Chat({ chat }) {
   }));
 
   const [currChat, UpdateCurrChat] = useState(chat);
-  const [yourID, setYourID] = useState();
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
@@ -30,7 +24,7 @@ function Chat({ chat }) {
       text: text,
       userid: profile.user.toString(),
     };
-    if (!(data.text == "")) {
+    if (!(data.text === "")) {
       io("http://localhost:5000").emit("send message", data);
       document.querySelector(".messageText").value = "";
     }
@@ -40,8 +34,6 @@ function Chat({ chat }) {
     io("http://localhost:5000").on(
       "output chat message",
       async ({ message, data }) => {
-        console.log(message);
-        console.log(data);
         await UpdateCurrChat(data);
 
         document
@@ -79,7 +71,7 @@ function Chat({ chat }) {
         </div>
         <div className="messagesWindow">
           {currChat.messages.map((message, key) => {
-            if (message.sender.toString() == profile._id.toString()) {
+            if (message.sender.toString() === profile._id.toString()) {
               return <Message key={key} align="right" text={message.text} />;
             } else {
               return <Message key={key} align="left" text={message.text} />;
@@ -112,19 +104,3 @@ function Chat({ chat }) {
 }
 
 export default Chat;
-
-// const useSocket = (serverUrl, topic) => {
-//   const [temp, setTemp] = React.useState(0);
-//   const [isConnected, setConnected] = React.useState(false);
-
-//   React.useEffect(() => {
-//     const client = socket.connect(serverUrl);
-//     client.on("connect", () => setConnected(true));
-//     client.on("disconnect", () => setConnected(false));
-//     client.on(topic, (data) => {
-//       setTemp(data);
-//     });
-//   }, [serverUrl, topic, isConnected]);
-
-//   return { temp, isConnected };
-// };

@@ -5,7 +5,7 @@ const Profile = require("../models/profile.model");
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
-// const nodemailer=require('../services/nodemailer');
+const sendEmail = require("../services/nodemailer");
 
 //route   users/
 //desc    register
@@ -57,6 +57,19 @@ router.post("/", async (req, res) => {
   } catch (error) {
     return res.status(400).json({ errors: error.message });
   }
+});
+
+//route   users/
+//desc    confirmEmail
+//access  public
+router.post("/verify", async (req, res) => {
+  const { email } = req.body;
+  let secretCode = "";
+  for (let i = 0; i < 6; i++) {
+    secretCode += Math.floor(Math.random() * 9);
+  }
+  sendEmail(email, secretCode);
+  res.json({ secretCode: secretCode });
 });
 
 module.exports = router;

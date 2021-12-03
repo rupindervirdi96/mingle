@@ -1,8 +1,5 @@
 import { NEW_CHAT, NEW_MESSAGE, REMOVE_CHAT } from "./types";
-// import io from "socket.io-client";
-
 import axios from "axios";
-import io from "socket.io-client";
 
 export const getMessages = (chatId) => async (dispatch) => {
   axios.defaults.headers.common["x-auth-token"] = JSON.parse(
@@ -15,7 +12,6 @@ export const getMessages = (chatId) => async (dispatch) => {
     data: res.data,
   });
 };
-
 
 export const sendMessage = (data) => async (dispatch) => {
   dispatch({

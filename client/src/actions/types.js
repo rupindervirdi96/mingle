@@ -18,3 +18,4 @@ export const GET_FRIENDS_POSTS = "GET_FRIENDS_POSTS";
 export const GET_POSTS_FOR_ANY_USER = "GET_POSTS_FOR_ANY_USER";
 export const LIKE_POST = "LIKE_POST";
 export const ADD_POST = "ADD_POST";
+export const VERIFY = "VERIFY";

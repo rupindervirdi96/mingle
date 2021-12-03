@@ -6,7 +6,7 @@ const Search = () => {
   return (
     <div className="search-container">
       <img src={fblogo} height="50px" alt="" />
-      <span>facebook-clone</span>
+      <span>MiNGLE</span>
     </div>
   );
 };

@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import "./register.style.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { register } from "../../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { register, verify } from "../../../actions/userActions";
 
 const Register = () => {
+  const { verificationKey } = useSelector((state) => ({
+    verificationKey: state.users.verificationKey,
+  }));
+
+  const [code, setCode] = useState();
+
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -47,7 +52,15 @@ const Register = () => {
         User.gender = gen.value;
       }
     });
-    dispatch(register(User));
+    if (verificationKey?.length > 0) {
+      if (verificationKey === code) {
+        dispatch(register(User));
+      } else {
+        alert("The code doesn't match the one sent to ", User.email);
+      }
+    } else {
+      dispatch(verify(User.email));
+    }
   };
 
   return (
@@ -63,7 +76,7 @@ const Register = () => {
               onChange={onChangeName}
               required
             />
-              <input
+            <input
               type="email"
               placeholder="Email"
               onChange={onChangeEmail}
@@ -98,6 +111,22 @@ const Register = () => {
                   <label>Female</label>
                 </div>
               </div>
+            </div>
+            <br />
+            <div
+              style={{
+                display: verificationKey?.length > 0 ? "block" : "none",
+              }}
+            >
+              <label htmlFor="">
+                Enter the key sent to your email and hit Sign Up again.
+              </label>
+              <input
+                type="text"
+                maxLength="6"
+                minLength="6"
+                onChange={(e) => setCode(e.target.value)}
+              />
             </div>
             <input type="submit" value="Sign Up" />
           </form>

@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <div className="nav-bar-container">
       <div className="nav-bar-login">
-        <span className="title-app">facebook-clone</span>
+        <span className="title-app">MiNGLE</span>
         <Login />
       </div>
     </div>

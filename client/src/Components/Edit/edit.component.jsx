@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./edit.style.scss";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../actions/userActions";
 import { setProfilePic, setCoverPic } from "../../actions/profileActions";
-// import more from "../../assets/more.png";
 import axios from "axios";
 
 function Edit({ onChange, type }) {
@@ -24,12 +23,10 @@ function Edit({ onChange, type }) {
   };
 
   const saveProfilePic = () => {
-    // alert(prof);
     dispatch(setProfilePic(prof));
     window.location.reload();
   };
 
-  //Cover Pic
   const updateCoverPic = (e) => {
     setCover(e.target.value);
   };
@@ -74,7 +71,7 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post(" /profile/info/change", data);
+    axios.post("/profile/info/change", data);
   };
   const updateWork = async (e) => {
     e.preventDefault();
@@ -90,7 +87,7 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post(" /profile/info/change", data);
+   axios.post(" /profile/info/change", data);
   };
   const updateEducation = async (e) => {
     e.preventDefault();
@@ -106,7 +103,7 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post(" /profile/info/change", data);
+   axios.post(" /profile/info/change", data);
   };
   const updateLocation = async (e) => {
     e.preventDefault();
@@ -119,16 +116,16 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-    const res = await axios.post(" /profile/info/change", data);
+    axios.post(" /profile/info/change", data);
   };
 
   return (
     <div className="EditContainer">
       <div
         className="screen"
-        onClick={() => (click == false ? onChange(false) : onChange(true))}
+        onClick={() => (click === false ? onChange(false) : onChange(true))}
       ></div>
-      {type == "status" ? (
+      {type === "status" ? (
         <div className="editStatus">
           <h2>Update Status</h2>
           <input
@@ -140,7 +137,7 @@ function Edit({ onChange, type }) {
             UPDATE
           </button>
         </div>
-      ) : type == "info" ? (
+      ) : type === "info" ? (
         <div className="editInfo">
           <h1>Edit Info</h1>
           <h4>Add Work</h4>
@@ -273,14 +270,14 @@ function Edit({ onChange, type }) {
           <button
             className="btnUpdate"
             onClick={() => {
-              click == false ? onChange(false) : onChange(true);
+              click === false ? onChange(false) : onChange(true);
               window.location.reload();
             }}
           >
             FINISH
           </button>
         </div>
-      ) : type == "profilePic" ? (
+      ) : type === "profilePic" ? (
         <div className="editProfilePhoto">
           <h2>Update Profile Photo</h2>
           <input
@@ -295,7 +292,7 @@ function Edit({ onChange, type }) {
             UPDATE
           </button>
         </div>
-      ) : type == "coverPic" ? (
+      ) : type === "coverPic" ? (
         <div className="editProfilePhoto">
           <h2>Update Cover Photo</h2>
           <input
