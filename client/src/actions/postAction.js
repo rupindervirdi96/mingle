@@ -2,6 +2,8 @@ import {
   GET_MY_POSTS,
   GET_POSTS_FOR_ANY_USER,
   GET_FRIENDS_POSTS,
+  ADD_POST,
+  LIKE_POST,
 } from "./types";
 import axios from "axios";
 
@@ -10,7 +12,7 @@ export const getMyPosts = () => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.get(" /posts/");
+    const res = await axios.get("/posts/");
     const data = res.data.reverse();
     dispatch({
       type: GET_MY_POSTS,
@@ -39,7 +41,7 @@ export const getAllPostsForFriends = () => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.get(` /posts/friends`);
+    const res = await axios.get(`/posts/friends`);
     const data = res.data.reverse();
     dispatch({
       type: GET_FRIENDS_POSTS,
@@ -55,8 +57,12 @@ export const likePost = (id) => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.post(` /posts/like/${id}`);
-    console.log(res);
+    const res = await axios.post(`/posts/like/${id}`);
+    console.log(res.data);
+    dispatch({
+      type: LIKE_POST,
+      data: res.data,
+    });
   } catch (error) {
     console.log(error.message);
   }
@@ -67,13 +73,17 @@ export const addPost = (text, image) => async (dispatch) => {
     axios.defaults.headers.common["x-auth-token"] = JSON.parse(
       sessionStorage.getItem("auth")
     );
-    const res = await axios.post(` /posts/`, {
+
+    const res = await axios.post(`/posts/`, {
       text,
       image,
     });
-    console.log(res);
-    window.location.reload();
+
+    dispatch({
+      type: ADD_POST,
+      data: res.data,
+    });
   } catch (error) {
-    console.log(error.message);
+    console.log("ERROR", error.message);
   }
 };

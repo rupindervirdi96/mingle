@@ -5,7 +5,7 @@ import fblogo from "../../../assets/facebook-clone.png";
 const Search = () => {
   return (
     <div className="search-container">
-      <img src={fblogo} height="50px" alt="" />
+      {/* <img src={fblogo} height="50px" alt="" /> */}
       <span>MiNGLE</span>
     </div>
   );

@@ -3,20 +3,16 @@ import "./post.style.scss";
 import { likePost } from "../../actions/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import like from "../../assets/like.png";
-import { useState } from "react";
+import moment from "moment";
 
 const Post = ({ post }) => {
-  const [liked, setLiked] = useState(false);
-
   const { profile } = useSelector((state) => ({
     profile: state.users.profile,
   }));
   const dispatch = useDispatch();
 
-  const LikePost = () => {
-    dispatch(likePost(post._id.toString()));
-    window.location.reload();
-    liked ? setLiked(false) : setLiked(true);
+  const onClickLike = () => {
+    dispatch(likePost(post._id?.toString()));
   };
   return (
     <div className="post">
@@ -47,8 +43,8 @@ const Post = ({ post }) => {
           ></div>
         )}
         <span>{post.name}</span>
-        <span style={{ fontSize: "16px", color: "#777" }}>
-          {post.date.split("T")[0]}
+        <span style={{ fontSize: "12px", color: "#777" }}>
+          {moment(post.date).format("MMM Do YY,  h:mm a")}
         </span>
       </div>
 
@@ -61,14 +57,17 @@ const Post = ({ post }) => {
       <div className="likeComment">
         <div className="likeCommentCounter">
           <span className="nbLikes">
-            <span>{post.likes.length}</span>
+            <span>{post.likes?.length}</span>
             <img height="30px" src={like} alt="" />
           </span>
         </div>
         <hr />
         <ul type="none">
-          <li onClick={LikePost}>LIKE</li>
-          <li>COMMENT</li>
+          <li onClick={onClickLike}>
+            {post.likes.includes(profile._id) ? "Unlike" : "Like"}
+          </li>
+          <li>Comment</li>
+          <li>Share</li>
         </ul>
       </div>
     </div>

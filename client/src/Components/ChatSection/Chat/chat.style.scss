@@ -2,7 +2,7 @@
 //   * {
 //   }
 
-// background-color: #0077ff;
+// background-color: #004da4;
 
 .Chat-Container {
   box-sizing: border-box;
@@ -21,13 +21,12 @@
 
     .contactDetails {
       border-radius: 9px 9px 0px 0px;
-      background-color: #0077ff;
+      background-color: #004da4;
       display: grid;
       align-items: center;
       grid-template-columns: max-content 1fr 25px;
       padding: 0px 10px;
       border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
-
 
       .profilePic {
         height: 35px;
@@ -61,7 +60,7 @@
 
         h4 {
           display: inline-block;
-          background-color:rgb(238, 238, 238);
+          background-color: rgb(238, 238, 238);
           word-wrap: break-word;
           width: 115px;
           max-width: 115px;
@@ -99,12 +98,12 @@
       align-items: center;
       justify-content: center;
       background-color: #eee;
-      background-color: #0077ff;
+      background-color: #004da4;
       grid-template-columns: 30px 1fr max-content;
       padding: 10px;
       border-radius: 0px 0px 9px 9px;
       border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
-      
+
       input {
         padding: 6px 5px;
         border-radius: 8px;
