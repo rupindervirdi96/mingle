@@ -29,17 +29,23 @@ const Login = () => {
   };
   return (
     <div className="login-component">
-      <form action="" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="email">
-          <span>email</span>
-          <input type="text" onChange={onChangeEmail} placeholder="username" />
+          <label>email</label>
+          <input
+            type="text"
+            onChange={onChangeEmail}
+            placeholder="username"
+            required
+          />
         </div>
         <div className="password">
-          <span>password</span>
+          <label>password</label>
           <input
             type="password"
             onChange={onChangePassword}
             placeholder="password"
+            required
           />
           <span>forget password</span>
         </div>

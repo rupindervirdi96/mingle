@@ -1,11 +1,11 @@
 .login-component {
   form {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr max-content;
 
     .email,
     .password,
     .loginBtn {
-      flex: 1;
       margin-right: 10px;
       display: flex;
       width: fit-content;
@@ -29,7 +29,7 @@
 
     input {
       padding: 0px 15px;
-      background-color: #136383;
+      background-color: #0087bc;
       color: white;
       font-family: "Roboto";
       font-size: 12px;
