@@ -1,30 +1,34 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (email,secretCode) => {
+const sendEmail = async (email, secretCode) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "hotmail",
       auth: {
-        user: "singhtest57@gmail.com",
+        user: "singhtest57@outlook.com",
         pass: "zxhbk546",
       },
       tls: { rejectUnauthorized: false },
     });
 
     const mailOptions = {
-      from: "singhtest57@gmail.com",
+      from: `"Mingle" singhtest57@outlook.com`,
       to: email,
       subject: "We sent you the key to complete the signup process.",
       text: secretCode,
     };
 
-    await transporter.sendMail(mailOptions, async (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(info);
-      }
-    });
+    try {
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error.message);
+        } else {
+          console.log(info);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
     return true;
   } catch (error) {

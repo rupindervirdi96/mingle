@@ -4,6 +4,7 @@ export const LOGIN_USER = "LOGIN_USER";
 export const SET_USER = "SET_USER";
 export const SET_FRIEND = "SET_FRIEND";
 export const SET_STATUS = "SET_STATUS";
+export const VERIFY = "VERIFY";
 export const GET_SUGGESTIONS = "GET_SUGGESTIONS";
 export const GET_FRIENDS = "GET_FRIENDS";
 export const GET_REQUESTS = "GET_REQUESTS";
@@ -18,4 +19,7 @@ export const GET_FRIENDS_POSTS = "GET_FRIENDS_POSTS";
 export const GET_POSTS_FOR_ANY_USER = "GET_POSTS_FOR_ANY_USER";
 export const LIKE_POST = "LIKE_POST";
 export const ADD_POST = "ADD_POST";
-export const VERIFY = "VERIFY";
+
+//PROFILE
+export const UPDATE_COVER_PIC = "UPDATE_COVER_PIC";
+export const UPDATE_PROFILE_PIC = "UPDATE_PROFILE_PIC";

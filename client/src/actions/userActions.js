@@ -64,9 +64,7 @@ export const changeStatus = (newStat) => async (dispatch) => {
   axios.defaults.headers.common["x-auth-token"] = JSON.parse(
     sessionStorage.getItem("auth")
   );
-  console.log("HEllo");
   const res = await axios.put(" /profile/update/status", { status: newStat });
-  console.log(res);
 
   dispatch({
     type: SET_STATUS,
@@ -85,7 +83,7 @@ export const removeFriendsProfile = () => (dispatch) => {
 
 export const verify = (email) => async (dispatch) => {
   const res = await axios.post("/users/verify", { email: email });
-  console.log(res.data);
+  // console.log(res.data);
   dispatch({
     type: VERIFY,
     data: res.data.secretCode,

@@ -12,8 +12,8 @@ const ContactList = () => {
       <div className="lists">
         <h1>Contacts</h1>
         <hr />
-        {friends.map((friend) => {
-          return <UserButton profile={friend} />;
+        {friends.map((friend, key) => {
+          return <UserButton key={key} profile={friend} />;
         })}
       </div>
     </div>

@@ -26,24 +26,21 @@ hr {
     padding: 10px 0px;
     display: grid;
     grid-template-columns: max-content 1fr max-content;
-// box-shadow: 0px 1px 4px 1px rgba($color: #000000, $alpha: 0.2);
 
     img {
-      // display: block;
       margin-left: auto;
       margin-right: auto;
-      height: 40px;
-      width: 40px;
+      height: 35px;
+      width: 35px;
       background-position: center;
       margin: 5px;
       border-radius: 50%;
     }
 
     span {
-      font-size: 22px;
+      font-size: 20px;
       text-align: left;
     }
-
   }
 
   .content {
@@ -51,26 +48,29 @@ hr {
 
     .text {
       text-align: left;
+      max-width: 100%;
       margin-bottom: 5px;
+      font-size: 14px;
+      overflow: hidden;
     }
-    
+
     .image {
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
       img {
         width: 100%;
       }
     }
   }
-  
+
   .likeComment {
     display: flex;
     flex-direction: column;
     padding: 0px;
     // margin-top: 10px;
-    
+
     .likeCommentCounter {
       display: flex;
       flex: 1;
@@ -85,7 +85,7 @@ hr {
         justify-content: flex-start;
         span {
           font-size: 20px;
-          color: #0077ff;
+          color: #004da4;
         }
       }
     }
@@ -94,14 +94,16 @@ hr {
       flex: 1;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 0px 10px;
 
       li {
-        flex: 1;
-        padding: 5px;
-        margin: 3px;
+        // flex: 1;
+        width: 150px;
+        padding: 10px 20px;
         border-radius: 5px;
+        margin-top: 5px;
+        text-align: center;
       }
 
       li:hover {

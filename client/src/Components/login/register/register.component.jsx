@@ -131,7 +131,6 @@ const Register = () => {
             <input type="submit" value="Sign Up" />
           </form>
         </div>
-        <div className="AppDescription"></div>
       </div>
     </div>
   );

@@ -15,20 +15,6 @@ const ChatSection = ({ profile }) => {
           return <Chat key={key} chat={chat} />;
         })}
       </div>
-      <div className="friends">
-        <ChatBtn
-          Click={() => {
-            var chats = document.querySelector(".chats");
-            chats.classList.contains("hidden")
-              ? chats.classList.remove("hidden")
-              : chats.classList.add("hidden");
-            var chatCont = document.querySelector(".chat-section");
-            chatCont.classList.contains("minimizeChat")
-              ? chatCont.classList.remove("minimizeChat")
-              : chatCont.classList.add("minimizeChat");
-          }}
-        />
-      </div>
     </div>
   );
 };
