@@ -1,4 +1,11 @@
-import { GET_SUGGESTIONS, GET_FRIENDS, GET_REQUESTS, GET_INFO } from "./types";
+import {
+  GET_SUGGESTIONS,
+  GET_FRIENDS,
+  GET_REQUESTS,
+  GET_INFO,
+  UPDATE_COVER_PIC,
+  UPDATE_PROFILE_PIC,
+} from "./types";
 import axios from "axios";
 
 export const getSuggestions = () => async (dispatch) => {
@@ -47,7 +54,6 @@ export const getInfo = () => async (dispatch) => {
 };
 
 export const setProfilePic = (photo) => async (dispatch) => {
-  console.log(photo);
   const data = {
     pic: photo,
   };
@@ -55,7 +61,12 @@ export const setProfilePic = (photo) => async (dispatch) => {
   axios.defaults.headers.common["x-auth-token"] = JSON.parse(
     sessionStorage.getItem("auth")
   );
-  await axios.post(" /profile/photo/prof", data);
+  const res = await axios.post("/profile/photo/prof", data);
+  dispatch({
+    type: UPDATE_PROFILE_PIC,
+    data: res.data,
+  });
+  // console.log(res.data);
 };
 
 export const setCoverPic = (photo) => async (dispatch) => {
@@ -65,5 +76,25 @@ export const setCoverPic = (photo) => async (dispatch) => {
   axios.defaults.headers.common["x-auth-token"] = JSON.parse(
     sessionStorage.getItem("auth")
   );
-  await axios.post(" /profile/photo/cover", data);
+  const res = await axios.post("/profile/photo/cover", data);
+  // console.log(res.data);
+  dispatch({
+    type: UPDATE_COVER_PIC,
+    data: res.data,
+  });
+};
+
+export const uploadImage = (file) => async (dispatch) => {
+  let formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "dyzi4adq");
+  let res = await fetch(
+    "https://api.cloudinary.com/v1_1/dinspdp3w/image/upload",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  res = await res.json();
+  return res.url;
 };

@@ -2,38 +2,17 @@ import React, { useState } from "react";
 import "./edit.style.scss";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../actions/userActions";
-import { setProfilePic, setCoverPic } from "../../actions/profileActions";
+import { setProfilePic } from "../../actions/profileActions";
 import axios from "axios";
 
 function Edit({ onChange, type }) {
   const [click, setClick] = useState(false);
   const [status, setStatus] = useState("");
-  const [prof, setProfile] = useState("");
-  const [cover, setCover] = useState("");
 
   const dispatch = useDispatch();
 
   const updateState = (e) => {
     setStatus(e.target.value);
-  };
-
-  //Profile Pic
-  const updateProfilePic = (e) => {
-    setProfile(e.target.value);
-  };
-
-  const saveProfilePic = () => {
-    dispatch(setProfilePic(prof));
-    window.location.reload();
-  };
-
-  const updateCoverPic = (e) => {
-    setCover(e.target.value);
-  };
-
-  const saveCoverPic = () => {
-    dispatch(setCoverPic(cover));
-    window.location.reload();
   };
 
   const saveStatus = () => {
@@ -87,7 +66,7 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-   axios.post(" /profile/info/change", data);
+    axios.post(" /profile/info/change", data);
   };
   const updateEducation = async (e) => {
     e.preventDefault();
@@ -103,7 +82,7 @@ function Edit({ onChange, type }) {
       sessionStorage.getItem("auth")
     );
 
-   axios.post(" /profile/info/change", data);
+    axios.post(" /profile/info/change", data);
   };
   const updateLocation = async (e) => {
     e.preventDefault();
@@ -275,33 +254,6 @@ function Edit({ onChange, type }) {
             }}
           >
             FINISH
-          </button>
-        </div>
-      ) : type === "profilePic" ? (
-        <div className="editProfilePhoto">
-          <h2>Update Profile Photo</h2>
-          <input
-            onChange={updateProfilePic}
-            type="text"
-            onLoad={(e) => {
-              e.focus();
-            }}
-            placeholder="Enter the url"
-          />
-          <button className="btnUpdate" onClick={saveProfilePic}>
-            UPDATE
-          </button>
-        </div>
-      ) : type === "coverPic" ? (
-        <div className="editProfilePhoto">
-          <h2>Update Cover Photo</h2>
-          <input
-            onChange={updateCoverPic}
-            type="text"
-            placeholder="Enter the url"
-          />
-          <button className="btnUpdate" onClick={saveCoverPic}>
-            UPDATE
           </button>
         </div>
       ) : (

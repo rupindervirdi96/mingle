@@ -1,4 +1,11 @@
-import { SET_USER, SET_FRIEND, SET_STATUS, VERIFY } from "../actions/types";
+import {
+  SET_USER,
+  SET_FRIEND,
+  SET_STATUS,
+  VERIFY,
+  UPDATE_COVER_PIC,
+  UPDATE_PROFILE_PIC,
+} from "../actions/types";
 
 const initialState = {
   profile: {},
@@ -31,6 +38,23 @@ export default function (state = initialState, action) {
         ...state,
         verificationKey: data,
       };
+    case UPDATE_COVER_PIC: {
+      let { profile } = state;
+      profile.coverPic = data;
+      return {
+        ...state,
+        Profile: profile,
+      };
+    }
+    case UPDATE_PROFILE_PIC: {
+      let { profile } = state;
+      profile.profilePic = data;
+      console.log(profile);
+      return {
+        ...state,
+        Profile: profile,
+      };
+    }
 
     default:
       return state;
