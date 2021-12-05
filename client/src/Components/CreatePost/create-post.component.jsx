@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./create-post.style.scss";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../actions/postAction";
+import { uploadImage } from "../../actions/profileActions";
 
 const CreatePost = ({ profile }) => {
-  const [imageUrl, setImageUrl] = useState("");
+  const [attachment, setAttachment] = useState();
+
   const OnClickMessageBox = () => {
     if (
       document.querySelector(".post-text-message").innerText ===
@@ -15,17 +17,19 @@ const CreatePost = ({ profile }) => {
   };
 
   const imgUrl = (e) => {
-    setImageUrl(e.target.value);
+    setAttachment(e.target.files[0]);
   };
 
   const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const text = document.querySelector(".post-text-message").innerText;
-    const image = imageUrl;
+    let image;
+    if (attachment) {
+      image = await dispatch(uploadImage(attachment));
+    }
     dispatch(addPost(text, image));
-    window.location.reload();
   };
 
   return (
@@ -57,27 +61,16 @@ const CreatePost = ({ profile }) => {
         <hr />
         <div className="attachments">
           <ul type="none">
-            <li
-              onClick={() => {
-                let input = document.querySelector(".addImage");
-                input.classList.contains("inputMove")
-                  ? input.classList.remove("inputMove")
-                  : input.classList.add("inputMove");
-              }}
-            >
+            <label className="upload-post-attachment" htmlFor="postAttachment">
               <img
                 src="https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/7v6BHTdGI6G.png"
                 height="20px"
                 alt=""
+                onChange={(e) => imgUrl(e)}
               />
               Add Photo
-            </li>
-            <input
-              type="text"
-              className="addImage"
-              onChange={imgUrl}
-              placeholder="Add Image url"
-            />
+            </label>
+            <input type="file" id="postAttachment" onChange={imgUrl} />
           </ul>
         </div>
         <button type="submit" className="post-btn">

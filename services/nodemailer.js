@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (email,secretCode) => {
+const sendEmail = async (email, secretCode) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -18,13 +18,17 @@ const sendEmail = async (email,secretCode) => {
       text: secretCode,
     };
 
-    await transporter.sendMail(mailOptions, async (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(info);
-      }
-    });
+    try {
+      await transporter.sendMail(mailOptions, async (error, info) => {
+        if (error) {
+          return error.message;
+        } else {
+          return info;
+        }
+      });
+    } catch (error) {
+      return error;
+    }
 
     return true;
   } catch (error) {

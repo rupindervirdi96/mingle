@@ -29,14 +29,19 @@
       background-position: center;
       border-radius: 0px 0px 10px 10px;
       position: relative;
-      
+
       .editCoverPhoto {
-        // height: 45px;
         position: absolute;
+        padding: 2px;
         top: 98%;
         left: 98%;
-        fill: #0077ff;
+        fill: #004da4;
         transform: translate(-100%, -100%);
+        transition: all 120ms ease;
+      }
+      .editCoverPhoto:hover {
+        transform: translate(-100%, -100%) scale(1.15);
+        transition: all 120ms ease;
       }
 
       .profile-photo {
@@ -50,10 +55,10 @@
         background-size: cover;
         background-position: center;
         border-radius: 50%;
-        
+
         .editProfilePhoto {
           position: absolute;
-          fill: #0077ff;
+          fill: #004da4;
           top: 80%;
           left: 80%;
           transform: translate(-50%, -50%);
@@ -80,7 +85,7 @@
           left: 100%;
           top: 50%;
           height: 22px;
-          fill: #0077ff;
+          fill: #004da4;
           transform: translate(-100%, -50%);
         }
       }
