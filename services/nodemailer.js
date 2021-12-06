@@ -18,13 +18,18 @@ const sendEmail = async (email, secretCode) => {
       text: secretCode,
     };
 
-    await transporter.sendMail(mailOptions, async (error, info) => {
-      if (error) {
-        return error;
-      } else {
-        return "Sent";
-      }
-    });
+
+    try {
+      await transporter.sendMail(mailOptions, async (error, info) => {
+        if (error) {
+          return error.message;
+        } else {
+          return info;
+        }
+      });
+    } catch (error) {
+      return error;
+    }
 
     return true;
   } catch (error) {
