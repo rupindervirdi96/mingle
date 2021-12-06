@@ -18,6 +18,7 @@ const sendEmail = async (email, secretCode) => {
       text: secretCode,
     };
 
+
     try {
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

@@ -76,6 +76,7 @@ export const setCoverPic = (photo) => async (dispatch) => {
     sessionStorage.getItem("auth")
   );
   const res = await axios.post("/profile/photo/cover", data);
+
   dispatch({
     type: UPDATE_COVER_PIC,
     data: res.data,

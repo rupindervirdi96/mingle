@@ -69,6 +69,7 @@ router.post("/verify", async (req, res) => {
     secretCode += Math.floor(Math.random() * 9);
   }
   const resp = await sendEmail(email, secretCode);
+
   res.json({ secretCode: secretCode, response: resp });
 });
 
