@@ -37,14 +37,10 @@ const CreatePost = ({ profile }) => {
       <form className="create-post-form" action="" onSubmit={onSubmit}>
         <div className="textPost">
           <div
+            className="create-post-picture"
             style={{
               backgroundImage: `url(${profile.profilePic})`,
-              borderRadius: "50%",
-              height: "38px",
-              marginRight: "8px",
-              width: "38px",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
+              
             }}
           ></div>
           <div className="postText">
