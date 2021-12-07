@@ -22,6 +22,12 @@
   .contactss {
     transform: translateX(0%);
     transition: 150ms all linear;
+    .lists {
+      width: 150px;
+      h1 {
+        font-size: 18px;
+      }
+    }
   }
 
   .appear {

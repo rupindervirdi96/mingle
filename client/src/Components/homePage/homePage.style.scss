@@ -1,13 +1,14 @@
 .homePage-container {
   background: #eee;
   position: relative;
-  top: 60px;
+  top: 50px;
   width: 100%;
   max-width: 100%;
-  min-height: calc(100vh - 59px);
+  min-height: calc(100vh - 50px);
   display: grid;
   text-align: center;
   grid-template-columns: 1fr 500px 1fr;
+  overflow: hidden;
 
   .Menu {
   }
@@ -62,20 +63,17 @@
 @media (max-width: "600px") {
   .homePage-container {
     width: 100%;
-    grid-template-columns: 0px 450px 1fr;
+    grid-template-columns: 0px 450px 0px;
+    display: flex;
   }
 
   .Menu {
     opacity: 0;
   }
-}
-
-@media (max-width: "0px") {
-  .homePage-container {
-    grid-template-columns: 0px 500px 1fr;
-  }
-
-  .Menu {
-    opacity: 0;
+  .feed-container {
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -2,17 +2,15 @@
   display: flex;
   align-items: center;
   font-size: 24px;
-  // font-weight: bold;
   text-transform: capitalize;
   span {
     font-family: "Monoton", cursive;
-    padding: 11px 0px;
-    // margin: 5px 10px 5px 0px;
+    color: #004da4;
   }
 
   @media only screen and(max-width:1000px) {
-    span {
-      display: none;
-    }
+    // span {
+    //   display: none;
+    // }
   }
 }

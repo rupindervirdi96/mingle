@@ -3,7 +3,7 @@ import "./main-tabs.style.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
 import { ReactComponent as FriendsIcon } from "../../../svg/friends.svg";
-import hamburger from "../../../svg/hamburger.svg";
+import menu from "../../../svg/menu.svg";
 import { removeFriendsProfile } from "../../../actions/userActions";
 import { useDispatch } from "react-redux";
 
@@ -23,7 +23,7 @@ const MainTabs = ({ profile }) => {
     <div className="main-tabs-container">
       <div
         className="hamburger"
-        style={{ backgroundImage: `url(${hamburger})` }}
+        style={{ backgroundImage: `url(${menu})` }}
         onClick={onClickHam}
       ></div>
       <ul className="dropDownList" type="none">
