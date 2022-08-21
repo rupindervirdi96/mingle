@@ -63,8 +63,8 @@ const ProfilePage = ({ friendsProfile, profile }) => {
           <div
             style={
               friendsProfile == null
-                ? { backgroundImage: "url(" + profile.coverPic + ")" }
-                : { backgroundImage: "url(" + friendsProfile.coverPic + ")" }
+                ? { backgroundImage: "url(" + profile?.coverPic + ")" }
+                : { backgroundImage: "url(" + friendsProfile?.coverPic + ")" }
             }
             className="cover"
           >
@@ -79,8 +79,6 @@ const ProfilePage = ({ friendsProfile, profile }) => {
                   id="editCoverPhoto"
                   className="editCoverPhoto"
                   onChange={async (e) => {
-                    // let url=await dispatch
-                    console.log("HELLO");
                     dispatch(
                       setCoverPic(
                         await dispatch(uploadImage(e.target.files[0]))
@@ -96,9 +94,10 @@ const ProfilePage = ({ friendsProfile, profile }) => {
             <div
               style={
                 friendsProfile == null
-                  ? { backgroundImage: "url(" + profile.profilePic + ")" }
+                  ? { backgroundImage: "url(" + profile?.profilePic + ")" }
                   : {
-                      backgroundImage: "url(" + friendsProfile.profilePic + ")",
+                      backgroundImage:
+                        "url(" + friendsProfile?.profilePic + ")",
                     }
               }
               className="profile-photo"
@@ -131,9 +130,9 @@ const ProfilePage = ({ friendsProfile, profile }) => {
           </div>
           {friendsProfile == null ? (
             <div className="userDescription">
-              <h1>{profile.name}</h1>
+              <h1>{profile?.name}</h1>
               <div>
-                {profile.status}{" "}
+                {profile?.status}{" "}
                 <EditIcon
                   className="edit-status editStatus"
                   height="15px"
@@ -146,8 +145,8 @@ const ProfilePage = ({ friendsProfile, profile }) => {
             </div>
           ) : (
             <div className="userDescription">
-              <h1>{friendsProfile.name}</h1>
-              <div>{friendsProfile.status}</div>
+              <h1>{friendsProfile?.name}</h1>
+              <div>{friendsProfile?.status}</div>
             </div>
           )}
           <hr />

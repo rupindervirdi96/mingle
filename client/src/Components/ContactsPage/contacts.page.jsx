@@ -12,9 +12,9 @@ const ContactsPage = ({ profile }) => {
   const { friendsProfile, suggestions, requests, friends } = useSelector(
     (state) => ({
       friendsProfile: state.users.friendsProfile,
-      suggestions: state.profile.suggestions,
-      requests: state.profile.requests,
-      friends: state.profile.friends,
+      suggestions: state.profile?.suggestions,
+      requests: state.profile?.requests,
+      friends: state.profile?.friends,
     })
   );
 

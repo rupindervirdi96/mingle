@@ -21,7 +21,7 @@ const Navbar = () => {
     <div className="nav-bar">
       <Search />
       <MainTabs profile={profile} />
-      <SecondaryTabs name={profile.name} />
+      <SecondaryTabs name={profile?.name} />
     </div>
   );
 };

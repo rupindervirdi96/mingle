@@ -10,7 +10,7 @@ const CreatePost = ({ profile }) => {
   const OnClickMessageBox = () => {
     if (
       document.querySelector(".post-text-message").innerText ===
-      `What's on your mind, ${profile.name}?`
+      `What's on your mind, ${profile?.name}?`
     ) {
       document.querySelector(".post-text-message").innerText = "";
     }
@@ -39,7 +39,7 @@ const CreatePost = ({ profile }) => {
           <div
             className="create-post-picture"
             style={{
-              backgroundImage: `url(${profile.profilePic})`,
+              backgroundImage: `url(${profile?.profilePic})`,
               
             }}
           ></div>
@@ -50,7 +50,7 @@ const CreatePost = ({ profile }) => {
               suppressContentEditableWarning={true}
               onClick={OnClickMessageBox}
             >
-              What's on your mind, {profile.name}?
+              What's on your mind, {profile?.name}?
             </div>
           </div>
         </div>

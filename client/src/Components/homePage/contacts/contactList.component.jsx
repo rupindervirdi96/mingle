@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const ContactList = () => {
   const { friends } = useSelector((state) => ({
-    friends: state.profile.friends,
+    friends: state.profile?.friends,
   }));
   return (
     <div className="contactss">

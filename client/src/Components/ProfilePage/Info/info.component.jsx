@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import InfoTab from "./infotab/infotab.component";
 const Info = ({ click }) => {
   const { info, friendsProfile } = useSelector((state) => ({
-    info: state.profile.info,
-    friendsProfile: state.users.friendsProfile,
+    info: state.profile?.info,
+    friendsProfile: state.users?.friendsProfile,
   }));
   return (
     <div className="info-container">
@@ -23,7 +23,7 @@ const Info = ({ click }) => {
             </div>
           )
         ) : (
-          friendsProfile.info.map((info) => {
+          friendsProfile?.info.map((info) => {
             return <InfoTab info={info} type={info.type} />;
           })
         )}

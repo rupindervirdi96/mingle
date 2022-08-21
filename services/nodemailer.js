@@ -3,16 +3,16 @@ const nodemailer = require("nodemailer");
 const sendEmail = async (email, secretCode) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "hotmail",
+      service: "Gmail",
       auth: {
-        user: "singhtest57@outlook.com",
-        pass: "zxhbk546",
+        user: "singhtest57@gmail.com",
+        pass: "qopffkzhveccomiu",
       },
       tls: { rejectUnauthorized: false },
     });
 
     const mailOptions = {
-      from: `"Mingle" singhtest57@outlook.com`,
+      from: `"Mingle" singhtest57@gmail.com`,
       to: email,
       subject: "We sent you the key to complete the signup process.",
       text: secretCode,
@@ -21,7 +21,7 @@ const sendEmail = async (email, secretCode) => {
     try {
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          console.log(error.message);
+          console.log("Error: ", error.message);
         } else {
           console.log(info);
         }

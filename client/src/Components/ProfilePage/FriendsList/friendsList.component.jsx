@@ -5,7 +5,7 @@ import "./friendsList.style.scss";
 
 function FriendList({}) {
   const { friends } = useSelector((state) => ({
-    friends: state.profile.friends,
+    friends: state.profile?.friends,
   }));
 
   return (

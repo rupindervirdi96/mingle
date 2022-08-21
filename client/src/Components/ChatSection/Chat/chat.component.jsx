@@ -22,7 +22,7 @@ function Chat({ chat }) {
     let data = {
       id: chat.friend.id,
       text: text,
-      userid: profile.user.toString(),
+      userid: profile?.user.toString(),
     };
     if (!(data.text === "")) {
       io("http://localhost:5000").emit("send message", data);
@@ -71,7 +71,7 @@ function Chat({ chat }) {
         </div>
         <div className="messagesWindow">
           {currChat.messages.map((message, key) => {
-            if (message.sender.toString() === profile._id.toString()) {
+            if (message.sender.toString() === profile?._id.toString()) {
               return <Message key={key} align="right" text={message.text} />;
             } else {
               return <Message key={key} align="left" text={message.text} />;

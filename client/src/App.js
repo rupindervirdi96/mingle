@@ -24,13 +24,15 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUser(JSON.parse(sessionStorage.getItem("auth"))));
-    dispatch(getMyPosts());
-    dispatch(getAllPostsForFriends());
-    dispatch(getAllFriends());
-    dispatch(getAllRequests());
-    dispatch(getInfo());
-  }, [dispatch]);
+    if (profile) {
+      dispatch(setUser(JSON.parse(sessionStorage.getItem("auth"))));
+      dispatch(getMyPosts());
+      dispatch(getAllPostsForFriends());
+      dispatch(getAllFriends());
+      dispatch(getAllRequests());
+      dispatch(getInfo());
+    }
+  }, [profile]);
 
   return (
     <div className="App">
