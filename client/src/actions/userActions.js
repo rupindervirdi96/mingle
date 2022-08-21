@@ -83,7 +83,6 @@ export const removeFriendsProfile = () => (dispatch) => {
 
 export const verify = (email) => async (dispatch) => {
   const res = await axios.post("/users/verify", { email: email });
-
   dispatch({
     type: VERIFY,
     data: res.data.secretCode,

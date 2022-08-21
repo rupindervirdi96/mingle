@@ -36,7 +36,7 @@ const UserButton = ({ profile }) => {
       <button>
         <div
           style={{
-            backgroundImage: `url(${profile.photo})`,
+            backgroundImage: `url(${profile?.photo})`,
             borderRadius: "50%",
             height: "40px",
             width: "40px",
@@ -45,7 +45,7 @@ const UserButton = ({ profile }) => {
             backgroundSize: "cover",
           }}
         ></div>
-        <span>{profile.name}</span>
+        <span>{profile?.name}</span>
         <div className="status"></div>
       </button>
     </div>
