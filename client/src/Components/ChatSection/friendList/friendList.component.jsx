@@ -7,7 +7,7 @@ const FriendList = ({ profile }) => {
     <div className="friend-list-container">
       <span className="friends-heading">Friends</span>
       <ul type="none" className="friend-list">
-        {profile.map((profile, key) => (
+        {profile?.map((profile, key) => (
           <UserButton key={key} prof={profile} />
         ))}
       </ul>

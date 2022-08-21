@@ -46,12 +46,14 @@ const Register = () => {
       password: user.password,
       birthdate: user.birthdate,
     };
+
     var Gender = document.getElementsByName("gender");
     Gender.forEach((gen) => {
       if (gen.checked) {
         User.gender = gen.value;
       }
     });
+
     if (verificationKey?.length > 0) {
       if (verificationKey === code) {
         dispatch(register(User));
@@ -113,22 +115,26 @@ const Register = () => {
               </div>
             </div>
             <br />
-            <div
-              style={{
-                display: verificationKey?.length > 0 ? "block" : "none",
-              }}
-            >
-              <label htmlFor="">
-                Enter the key sent to your email and hit Sign Up again.
-              </label>
-              <input
-                type="text"
-                maxLength="6"
-                minLength="6"
-                onChange={(e) => setCode(e.target.value)}
-              />
-            </div>
-            <input type="submit" value="Sign Up" />
+            {verificationKey?.length > 0 && (
+              <div>
+                <input
+                  type="button"
+                  onClick={() => dispatch(verify(user?.email))}
+                  value="Send Again"
+                  name="Resend Code"
+                  id="resendCode"
+                />
+                <br />
+                <label>Check mail for the secret code?</label>
+                <input
+                  type="text"
+                  maxLength="6"
+                  minLength="6"
+                  onChange={(e) => setCode(e.target.value)}
+                />
+              </div>
+            )}
+            <input name="submitBtn" type="submit" value="Sign Up" />
           </form>
         </div>
       </div>

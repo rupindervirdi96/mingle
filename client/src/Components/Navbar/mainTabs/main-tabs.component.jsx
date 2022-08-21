@@ -69,7 +69,7 @@ const MainTabs = ({ profile }) => {
           <li onClick={() => dispatch(removeFriendsProfile())}>
             <div
               style={{
-                backgroundImage: `url(${profile.profilePic})`,
+                backgroundImage: `url(${profile?.profilePic})`,
                 borderRadius: "50%",
                 height: "40px",
                 width: "40px",

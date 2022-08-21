@@ -17,10 +17,10 @@ const Post = ({ post }) => {
   return (
     <div className="post">
       <div className="creator">
-        {post.profile === profile._id ? (
+        {post.profile === profile?._id ? (
           <div
             style={{
-              backgroundImage: `url(${profile.profilePic})`,
+              backgroundImage: `url(${profile?.profilePic})`,
               borderRadius: "50%",
               height: "40px",
               width: "40px",
@@ -64,7 +64,7 @@ const Post = ({ post }) => {
         <hr />
         <ul type="none">
           <li onClick={onClickLike}>
-            {post.likes.includes(profile._id) ? "Unlike" : "Like"}
+            {post.likes.includes(profile?._id) ? "Unlike" : "Like"}
           </li>
           <li>Comment</li>
           <li>Share</li>
