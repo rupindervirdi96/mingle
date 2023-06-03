@@ -63,6 +63,7 @@ app.use('/messages', require('./routes/message.route'));
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
     app.get("*", (req, res) => {
+        res.setHeader("Access-Control-Allow-Credentials","true")
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
 }
