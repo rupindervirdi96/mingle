@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import Login from "./Components/login/login.page";
 import Homepage from "./Components/homePage/homePage.component";
@@ -21,16 +21,19 @@ function App() {
     profile: state.users.profile,
   }));
 
+  const [retrieve, setRetrieve] = useState();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (profile) {
+    if (profile && !retrieve) {
       dispatch(setUser(JSON.parse(sessionStorage.getItem("auth"))));
       dispatch(getMyPosts());
       dispatch(getAllPostsForFriends());
       dispatch(getAllFriends());
       dispatch(getAllRequests());
       dispatch(getInfo());
+      setRetrieve(true);
     }
   }, [profile]);
 

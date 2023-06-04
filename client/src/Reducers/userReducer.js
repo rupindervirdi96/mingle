@@ -49,7 +49,6 @@ export default function (state = initialState, action) {
     case UPDATE_PROFILE_PIC: {
       let { profile } = state;
       profile.profilePic = data;
-      console.log(profile);
       return {
         ...state,
         Profile: profile,

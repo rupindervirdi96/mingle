@@ -15,11 +15,8 @@ router.post("/me", auth, async (req, res) => {
     }).populate("user", ["name", "birthdate", "gender"]);
 
     if (profile) {
-      console.log("profile found");
       res.json(profile);
     }
-
-    console.log("New profile");
     res.json(profile);
   } catch (error) {
     res.status(400).json({ msg: error.message });
@@ -49,7 +46,6 @@ router.get("/:id", async (req, res) => {
 //acces     private
 router.put("/update/status", auth, async (req, res) => {
   try {
-    console.log(req.body);
     const profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       { $set: { status: req.body.status } },

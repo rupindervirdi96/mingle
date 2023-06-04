@@ -8,7 +8,6 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case NEW_CHAT:
-            console.log(action.data);
             return {
                 ...state, chatsOpen: [...state.chatsOpen, action.data]
             }
