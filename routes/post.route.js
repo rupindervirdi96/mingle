@@ -86,14 +86,12 @@ router.post("/like/:id", auth, async (req, res) => {
     });
 
     if (post.likes.some((like) => like.toString() === profile._id.toString())) {
-      console.log("remove like");
       post.likes = post.likes.filter(
         (like) => like.toString() !== profile._id.toString()
       );
       await post.save();
       return res.json({ post: post, profile: profile._id });
     } else {
-      console.log("add like");
       post.likes.push(profile._id.toString());
       await post.save();
       return res.json({ post: post, profile: profile._id });

@@ -58,7 +58,6 @@ export const likePost = (id) => async (dispatch) => {
       sessionStorage.getItem("auth")
     );
     const res = await axios.post(`/posts/like/${id}`);
-    console.log(res.data);
     dispatch({
       type: LIKE_POST,
       data: res.data,
