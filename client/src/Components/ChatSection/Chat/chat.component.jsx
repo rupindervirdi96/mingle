@@ -25,13 +25,13 @@ function Chat({ chat }) {
       userid: profile?.user.toString(),
     };
     if (!(data.text === "")) {
-      io("http://localhost:5000").emit("send message", data);
+      io("https://mingle-app-virdi.onrender.com").emit("send message", data);
       document.querySelector(".messageText").value = "";
     }
   };
 
   useEffect(() => {
-    io("http://localhost:5000").on(
+    io("https://mingle-app-virdi.onrender.com").on(
       "output chat message",
       async ({ message, data }) => {
         await UpdateCurrChat(data);
