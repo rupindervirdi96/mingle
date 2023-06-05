@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./main-tabs.style.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../../svg/home.svg";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 const MainTabs = ({ profile }) => {
   const dispatch = useDispatch();
+  const [path, setPath] = useState();
 
   const onClickHam = () => {
     var list = document.querySelector(".dropDownList");
@@ -61,12 +62,21 @@ const MainTabs = ({ profile }) => {
       </ul>
       <ul className="tabs-list" type="none">
         <Link to="/home">
-          <li className="homeIcon">
+          <li
+            className={`${
+              window.location.pathname === "/home" ? "active" : ""
+            }`}
+          >
             <HomeIcon />
           </li>
         </Link>
         <Link to="/profile">
-          <li onClick={() => dispatch(removeFriendsProfile())}>
+          <li
+            onClick={() => dispatch(removeFriendsProfile())}
+            className={`${
+              window.location.pathname === "/profile" ? "active" : ""
+            }`}
+          >
             <div
               style={{
                 backgroundImage: `url(${profile?.profilePic})`,
@@ -80,7 +90,11 @@ const MainTabs = ({ profile }) => {
           </li>
         </Link>
         <Link to="/friends">
-          <li>
+          <li
+            className={`${
+              window.location.pathname === "/friends" ? "active" : ""
+            }`}
+          >
             <FriendsIcon fill="#000000" />
           </li>
         </Link>

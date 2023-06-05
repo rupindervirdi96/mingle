@@ -19,13 +19,8 @@
       border-bottom: 0px solid #fff;
     }
 
-    li:active {
-      border-bottom: 3px solid rgb(0, 119, 255);
-    }
-
     li:hover {
       border-bottom: 3px solid rgb(0, 119, 255);
-      background-color: #eee;
     }
   }
 
@@ -85,13 +80,13 @@
     transition: 150ms opacity ease-in;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     .hamburger {
       display: flex;
     }
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 600px) {
     .dropDownList {
       display: none;
     }

@@ -30,7 +30,7 @@ const UserButton = ({ profile }) => {
       onClick={() => {
         getAllMessages(profile);
         var chats = document.querySelector(".chats");
-        chats.classList.remove("hidden");
+        // chats.classList.remove("hidden");
       }}
     >
       <button>

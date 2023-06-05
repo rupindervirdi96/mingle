@@ -48,8 +48,9 @@ function Chat({ chat }) {
     document.querySelector(".messageText").focus();
   }, []);
   return (
-    <div className="Chat-Container">
-      <div className="chat-box">
+    <div className="chatContainer">
+      {/* <div className="chat-box"> */}
+      <form action="" onSubmit={sendMessages}>
         <div className="contactDetails">
           <div
             className="profilePic"
@@ -61,11 +62,12 @@ function Chat({ chat }) {
               dispatch(removeChat(chat.friend.id));
             }}
             style={{
-              width: "15px",
-              height: "15px",
+              width: "20px",
+              height: "20px",
               backgroundImage: `url(${cross})`,
               backgroundPosition: "center",
-              backgroundSize: "center",
+              backgroundSize: "cover",
+              borderRadius: "50%",
             }}
           ></div>
         </div>
@@ -78,27 +80,26 @@ function Chat({ chat }) {
             }
           })}
         </div>
-        <form action="" onSubmit={sendMessages}>
-          <div className="textBox">
-            <Emoji />
-            <input
-              type="text"
-              className="messageText"
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
-              placeholder="Type your message"
-            />
-            <img
-              onClick={sendMessages}
-              height="25px"
-              width="25px"
-              src={send}
-              alt=""
-            />
-          </div>
-        </form>
-      </div>
+        <div className="textBox">
+          <Emoji />
+          <input
+            type="text"
+            className="messageText"
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+            placeholder="Type your message"
+          />
+          <img
+            onClick={sendMessages}
+            height="25px"
+            width="25px"
+            src={send}
+            alt=""
+          />
+        </div>
+      </form>
+      {/* </div> */}
     </div>
   );
 }

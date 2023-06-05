@@ -1,58 +1,9 @@
 .chat-section {
   display: grid;
-  // width: 100%;
   position: fixed;
   top: 100%;
   left: 100%;
   transform: translate(-100%, -100%);
   grid-template-columns: 1fr max-content;
   align-items: flex-end;
-  // border: 1px solid black;
-
-  .chats {
-    display: flex;
-    width: 90%;
-    // border: 1px solid black;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    justify-content: flex-end;
-    transform: translate(-50%, -100%);
-    // overflow-x: scroll;
-    transition: 150ms all linear;
-    // transition: 500ms all linear;
-    // overflow-x: scroll;
-
-    // ::-webkit-scrollbar,
-    // ::-webkit-scrollbar-button,
-    // ::-webkit-scrollbar-thumb,
-    // ::-webkit-scrollbar-track-piece,
-    // ::-webkit-scrollbar-track {
-    //   width: 0px;
-    //   height: 0px;
-    // }
-  }
-
-  .hidden {
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: 150ms all linear;
-  }
-
-  .friends {
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-
-    .friend-list-container {
-      border: 2px solid rgb(255, 255, 255);
-      border-radius: 5px;
-      padding: 2px;
-    }
-  }
-
-  .chatButton {
-    display: flex;
-    justify-content: flex-end;
-  }
 }

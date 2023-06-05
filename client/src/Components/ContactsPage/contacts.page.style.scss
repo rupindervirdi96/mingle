@@ -1,23 +1,20 @@
 .contacts-page {
+  position: relative;
+  display: grid;
+  height: auto;
+  grid-template-columns: 250px 1fr;
+  top: 50px;
+
+  .profile-container {
+    top: 0;
+  }
+
+  .default {
     position: relative;
-    display: grid;
-    height: auto;
-    grid-template-columns: 250px 1fr;
-    top: 59px;
-
-
-
-    .profile-container {
-        top: 0;
-    }
-
-    .default {
-        position: relative;
-        height: calc(100vh - 59px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

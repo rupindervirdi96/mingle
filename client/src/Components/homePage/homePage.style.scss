@@ -10,14 +10,8 @@
   grid-template-columns: 1fr 500px 1fr;
   overflow: hidden;
 
-  .Menu {
-  }
-
   .feed-container {
     margin: 0px 0px;
-  }
-
-  .contacts {
   }
 
   .optionss {
@@ -63,12 +57,30 @@
 @media (max-width: "600px") {
   .homePage-container {
     width: 100%;
-    grid-template-columns: 0px 450px 0px;
-    display: flex;
+    grid-template-columns: 1fr 0px;
+    display: grid;
   }
 
   .Menu {
-    opacity: 0;
+    display: none;
+  }
+  .feed-container {
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: "1000px") {
+  .homePage-container {
+    width: 100%;
+    grid-template-columns: 1fr max-content;
+    display: grid;
+  }
+
+  .Menu {
+    display: none;
   }
   .feed-container {
     width: 100%;

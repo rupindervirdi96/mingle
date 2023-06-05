@@ -11,7 +11,7 @@
   overflow: visible;
   padding: 0px 15px;
 
-  @media (max-width: "800px") {
+  @media (max-width: "600px") {
     grid-template-columns: max-content max-content max-content;
     justify-content: space-between;
     padding: 0px 5px;
