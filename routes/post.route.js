@@ -85,29 +85,19 @@ router.post("/like/:id", auth, async (req, res) => {
       _id: req.params.id,
     });
 
-    if (post.likes.length == 0) {
-      console.log("was empty");
-      post.likes.push(profile._id);
+    if (post.likes.some((like) => like.toString() === profile._id.toString())) {
+      console.log("remove like");
+      post.likes = post.likes.filter(
+        (like) => like.toString() !== profile._id.toString()
+      );
       await post.save();
       return res.json({ post: post, profile: profile._id });
     } else {
-      let check = false;
-      let counter = -1;
-      post.likes.forEach(async (like) => {
-        counter += 1;
-        if (like.toString() === profile._id.toString()) {
-          console.log("remove");
-          post.likes.splice(counter, 1);
-          check = true;
-          return res.json({ post: post, profile: profile._id });
-        }
-      });
-      if (!check) {
-        post.likes.push(profile._id);
-        return res.json({ post: post, profile: profile._id });
-      }
+      console.log("add like");
+      post.likes.push(profile._id.toString());
+      await post.save();
+      return res.json({ post: post, profile: profile._id });
     }
-    await post.save();
   } catch (error) {
     res.json({ msg: error.message });
   }
