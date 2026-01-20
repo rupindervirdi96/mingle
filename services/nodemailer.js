@@ -5,14 +5,14 @@ const sendEmail = async (email, secretCode) => {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: "singhtest57@gmail.com",
-        pass: "qopffkzhveccomiu",
+        user: "rupzvirdi.96@gmail.com",
+        pass: "rgkr mssa lmuq wrud",
       },
       tls: { rejectUnauthorized: false },
     });
 
     const mailOptions = {
-      from: `"Mingle" singhtest57@gmail.com`,
+      from: `"Mingle" rupzvirdi.96@gmail.com`,
       to: email,
       subject: "We sent you the key to complete the signup process.",
       text: secretCode,
