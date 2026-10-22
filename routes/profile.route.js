@@ -1,303 +1,147 @@
 const express = require("express");
-const router = express.Router();
+const crypto = require("crypto");
 const auth = require("../middleware/auth");
 const Profile = require("../models/profile.model");
 const Post = require("../models/post.model");
-const { find } = require("../models/profile.model");
+const {
+  summary,
+  ownProfile,
+  getMyProfile,
+  friendIds,
+  relationship,
+  summariesById,
+  SUMMARY_FIELDS,
+} = require("../lib/profiles");
+const { isOnline } = require("../lib/realtime");
+const { badRequest, notFound } = require("../lib/errors");
 
-//route     profile/me
-//desc      createProfile
-//acces     private
-router.post("/me", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      user: req.user.id,
-    }).populate("user", ["name", "birthdate", "gender"]);
+const router = express.Router();
+router.use(auth);
 
-    if (profile) {
-      res.json(profile);
-    }
-    res.json(profile);
-  } catch (error) {
-    res.status(400).json({ msg: error.message });
-  }
+const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const isImageUrl = (value) => /^https?:\/\/\S+$/i.test(value);
+
+// Which fields each kind of intro entry accepts, and whether only one may exist.
+const INFO_TYPES = {
+  work: { fields: ["position", "company", "location", "start", "end"], single: false },
+  education: { fields: ["course", "institute", "location", "start", "end"], single: false },
+  location: { fields: ["city", "country"], single: true },
+  relation: { fields: ["rel"], single: true },
+};
+
+// route   GET /api/profiles/search?q=
+router.get("/search", async (req, res) => {
+  const q = String(req.query.q || "").trim();
+  if (!q) return res.json([]);
+  const me = await getMyProfile(req);
+  const results = await Profile.find({
+    _id: { $ne: me._id },
+    name: new RegExp(escapeRegex(q), "i"),
+  })
+    .select(SUMMARY_FIELDS)
+    .limit(20);
+  res.json(
+    results.map((p) => ({
+      ...summary(p),
+      relationship: relationship(me, p._id),
+      online: isOnline(p._id),
+    }))
+  );
 });
 
-//route     profile/:id
-//desc      OpenFriend'sProfile
-//acces     private
+// route   PATCH /api/profiles/me
+// desc    Update name, status, profile picture or cover picture
+router.patch("/me", async (req, res) => {
+  const me = await getMyProfile(req);
+  const { name, status, profilePic, coverPic } = req.body;
+
+  if (name !== undefined) {
+    const trimmed = String(name).trim();
+    if (trimmed.length < 2 || trimmed.length > 60) {
+      throw badRequest("Name must be between 2 and 60 characters.");
+    }
+    me.name = trimmed;
+  }
+  if (status !== undefined) {
+    const trimmed = String(status).trim();
+    if (trimmed.length > 160) throw badRequest("Bio must be 160 characters or fewer.");
+    me.status = trimmed;
+  }
+  for (const [key, value] of Object.entries({ profilePic, coverPic })) {
+    if (value === undefined) continue;
+    if (!isImageUrl(value)) throw badRequest("That image link isn't valid.");
+    me[key] = value;
+  }
+
+  await me.save();
+  res.json(ownProfile(me));
+});
+
+// route   POST /api/profiles/me/info
+// desc    Add an intro entry (work, education, location, relationship)
+router.post("/me/info", async (req, res) => {
+  const me = await getMyProfile(req);
+  const spec = INFO_TYPES[req.body.type];
+  if (!spec) throw badRequest("Unknown intro type.");
+
+  const entry = { id: crypto.randomUUID(), type: req.body.type };
+  for (const field of spec.fields) {
+    const value = String(req.body[field] ?? "").trim();
+    if (value) entry[field] = value.slice(0, 100);
+  }
+  const required = spec.fields.filter((f) => !["start", "end", "location"].includes(f));
+  if (required.some((f) => !entry[f])) throw badRequest("Please fill in the required fields.");
+
+  me.info = [
+    ...(spec.single ? me.info.filter((i) => i.type !== entry.type) : me.info),
+    entry,
+  ];
+  await me.save();
+  res.json(me.info);
+});
+
+// route   DELETE /api/profiles/me/info/:index
+router.delete("/me/info/:index", async (req, res) => {
+  const me = await getMyProfile(req);
+  const index = Number(req.params.index);
+  if (!Number.isInteger(index) || index < 0 || index >= me.info.length) {
+    throw notFound("That intro entry doesn't exist.");
+  }
+  me.info = me.info.filter((_, i) => i !== index);
+  await me.save();
+  res.json(me.info);
+});
+
+// route   GET /api/profiles/:id
+// desc    A profile page, with how the viewer is related to it
 router.get("/:id", async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      _id: req.params.id,
-    });
+  const [me, profile] = await Promise.all([
+    getMyProfile(req),
+    Profile.findById(req.params.id),
+  ]);
+  if (!profile) throw notFound("This profile doesn't exist.");
 
-    if (!profile) {
-      console.log("profile not found");
-    }
-    res.json(profile);
-  } catch (error) {
-    res.json({ msg: error.message });
-  }
-});
+  const ids = friendIds(profile);
+  const listed = ids.slice(0, 200);
+  const friends = await summariesById(listed);
+  const myFriends = new Set(friendIds(me));
+  const postCount = await Post.countDocuments({ profile: profile._id.toString() });
 
-//route     profile/update/status
-//desc      updateStatus
-//acces     private
-router.put("/update/status", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOneAndUpdate(
-      { user: req.user.id },
-      { $set: { status: req.body.status } },
-      { new: true }
-    );
-    return res.json(profile);
-  } catch (error) {
-    return res.json({ msg: error.message });
-  }
-});
-
-//route     profile/update/friends
-//desc      send Request
-//acces     private
-router.put("/update/friends/request/:id", auth, async (req, res) => {
-  try {
-    let requested = false;
-    const profile = await Profile.findOne({
-      user: req.user.id,
-    });
-    const friendsProfile = await Profile.findOne({
-      _id: req.params.id,
-    });
-    res.json(friendsProfile);
-    friendsProfile.contacts.requests.filter((friend) => {
-      if (friend.id === profile.id) {
-        res.json("Friend Request already sent.");
-        requested = true;
-      }
-    });
-    if (!requested) {
-      const friend = {
-        id: profile.id,
-        name: profile.name,
-        photo: profile.profilePic,
-        status: "received",
-      };
-      const request = {
-        id: friendsProfile.id,
-        name: friendsProfile.name,
-        photo: profile.profilePic,
-        status: "requested",
-      };
-
-      friendsProfile.contacts.requests.unshift(friend);
-      profile.contacts.requests.unshift(request);
-      const res1 = await friendsProfile.save();
-      const res2 = await profile.save();
-      return res.json({
-        friendsProf: res1,
-        myProf: res2,
-      });
-    }
-    // console.log("hello");
-  } catch (error) {
-    return res.json({ msg: error.message });
-  }
-});
-
-//route     profile/update/friends
-//desc      Accept Request
-//acces     private
-router.put("/update/friends/accept/:id", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      user: req.user.id,
-    });
-
-    const friendsProfile = await Profile.findOne({
-      _id: req.params.id,
-    });
-    for (var i = 0; i < profile.contacts.requests.length; i++) {
-      if (profile.contacts.requests[i].id == friendsProfile.id) {
-        profile.contacts.requests.splice(i, 1);
-        const friend = {
-          id: friendsProfile.id,
-          photo: friendsProfile.profilePic,
-          name: friendsProfile.name,
-        };
-        profile.contacts.friends.unshift(friend);
-      }
-    }
-    for (var i = 0; i < friendsProfile.contacts.requests.length; i++) {
-      if (friendsProfile.contacts.requests[i].id == profile.id) {
-        friendsProfile.contacts.requests.splice(i, 1);
-        const friend = {
-          id: profile.id,
-          photo: profile.profilePic,
-          name: profile.name,
-        };
-        friendsProfile.contacts.friends.unshift(friend);
-      }
-    }
-    await profile.save();
-    await friendsProfile.save();
-    // res.json({ prof: profile, frndProf: friendsProfile })
-  } catch (error) {
-    res.json(error.message);
-  }
-});
-
-//route     profile/update/friends/allrequests
-//desc      View all Requests
-//acces     privatef
-router.get("/update/friends/allrequests", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      user: req.user.id,
-    });
-    res.json(profile.friends);
-  } catch (error) {
-    res.json(error.message);
-  }
-});
-
-//route     profile/update/getSuggestions
-//desc      getSuggestions
-//acces     private
-router.get("/update/suggestions", auth, async (req, res) => {
-  try {
-    const myProf = await Profile.findOne({
-      user: req.user.id,
-    });
-    const friendsProfiles = [];
-    myProf.contacts.friends.filter((friend) => {
-      friendsProfiles.push(friend.id);
-    });
-    const profiles = await Profile.find({});
-    const requests = [];
-    myProf.contacts.requests.forEach((req) => {
-      requests.push(req.id);
-    });
-    const suggestions = [];
-    profiles.forEach((profile) => {
-      if (
-        profile.id != myProf.id &&
-        !friendsProfiles.includes(profile.id) &&
-        !requests.includes(profile.id)
-      ) {
-        suggestions.push(profile);
-      }
-    });
-    res.json(suggestions);
-  } catch (error) {
-    res.json(error.message);
-  }
-});
-
-//route     profile/friends/get
-//desc      getFriends
-//acces     private
-router.get("/friends/get", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      user: req.user.id,
-    });
-
-    const friends = [];
-    profile.contacts.friends.forEach((friend) => {
-      friends.push(friend);
-    });
-    res.json(friends);
-  } catch (error) {
-    res.json(error.message);
-  }
-});
-
-//route     profile/friends/get
-//desc      getAllRequest
-//acces     private
-router.get("/requests/get", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      user: req.user.id,
-    });
-    let requests = [];
-    profile.contacts.requests.forEach((request) => {
-      if (request.status == "received") {
-        requests.push(request);
-      }
-    });
-
-    res.json(requests);
-  } catch (error) {
-    res.json(error.message);
-  }
-});
-
-//route     profile/friends/get
-//desc      changeInfo
-//acces     private
-router.post("/info/change", auth, async (req, res) => {
-  const { type } = req.body;
-  const profile = await Profile.findOne({ user: req.user.id });
-  switch (type) {
-    case "work":
-      profile.info.push(req.body);
-      break;
-    case "education":
-      profile.info.push(req.body);
-      break;
-    case "location":
-      profile.info.push(req.body);
-      break;
-    case "relation":
-      profile.info.push(req.body);
-      break;
-
-    default:
-      break;
-  }
-  await profile.save();
-});
-
-//route     profile/friends/get
-//desc      getInfo
-//acces     private
-router.get("/info/getinfo", auth, async (req, res) => {
-  const profile = await Profile.findOne({ user: req.user.id });
-  // console.log(profile.info);
-  res.json(profile.info);
-});
-
-//route     profile/photo/prof
-//desc      setProfilePhoto
-//acces     private
-router.post("/photo/prof", auth, async (req, res) => {
-  const profile = await Profile.findOne({ user: req.user.id });
-  profile.profilePic = req.body.pic;
-  let response = await profile.save();
-  res.json(response.profilePic);
-  // const posts = await Post.find({
-  //     profile: profile._id.toString()
-  // });
-  // console.log(posts);
-
-  // posts.forEach(post => {
-  //     post.profPic = req.body.pic;
-  //     post.save();
-  // })
-});
-
-//route     profile/photo/cover
-//desc      setCoverPhoto
-//acces     private
-router.post("/photo/cover", auth, async (req, res) => {
-  const profile = await Profile.findOne({ user: req.user.id });
-  profile.coverPic = req.body.pic;
-  let response = await profile.save();
-  res.json(response.coverPic);
-  // profile.coverPic = req.body;
-  // profile.save();
+  res.json({
+    ...summary(profile),
+    coverPic: profile.coverPic,
+    info: profile.info || [],
+    createdAt: profile.createdAt,
+    relationship: relationship(me, profile._id),
+    online: isOnline(profile._id),
+    friendCount: ids.length,
+    mutualCount: ids.filter((id) => myFriends.has(id)).length,
+    postCount,
+    friends: listed
+      .map((id) => ({ ...friends.get(id), online: isOnline(id) }))
+      .filter((f) => f._id),
+  });
 });
 
 module.exports = router;
