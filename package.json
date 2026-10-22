@@ -1,46 +1,32 @@
 {
   "name": "mingle",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Mingle - a small social network with real-time chat and notifications",
   "main": "server.js",
   "engines": {
-    "node": "14.17.0",
-    "npm": "6.13.6"
+    "node": "22.x"
   },
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server \" \"npm run client\"",
-    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run server\" \"npm run client\"",
+    "build": "npm install --prefix client --include=dev && npm run build --prefix client"
   },
-  "author": "",
+  "author": "Rupinder Virdi",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "config": "^3.3.1",
+    "config": "^3.3.12",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-http-proxy": "^1.6.0",
-    "express-validator": "^6.4.1",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.26.0",
-    "mongoose": "^5.9.14",
-    "node-sass": "^4.14.1",
-    "nodemailer": "^6.7.2",
-    "react-datepicker": "^2.16.0",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "request": "^2.88.2",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^10.2.1",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
-    "nodemon": "^2.0.3"
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.14"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "mongoURI": "MONGO_URI",
+  "jwtSecret": "JWT_SECRET",
+  "smtp": {
+    "service": "SMTP_SERVICE",
+    "user": "SMTP_USER",
+    "pass": "SMTP_PASS"
+  },
+  "cloudinary": {
+    "cloudName": "CLOUDINARY_CLOUD_NAME",
+    "uploadPreset": "CLOUDINARY_UPLOAD_PRESET"
+  }
+}
