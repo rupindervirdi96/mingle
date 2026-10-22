@@ -1,9 +1,0 @@
-.chat-section {
-  display: grid;
-  position: fixed;
-  top: 100%;
-  left: 100%;
-  transform: translate(-100%, -100%);
-  grid-template-columns: 1fr max-content;
-  align-items: flex-end;
-}
