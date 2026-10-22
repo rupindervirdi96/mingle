@@ -1,0 +1,101 @@
+// Design tokens. Components only ever use these custom properties, so the
+// dark theme is a matter of redefining them.
+
+:root {
+  --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --brand-1: #5b3df5;
+  --brand-2: #b23dff;
+  --brand-3: #ff5d8f;
+  --brand-gradient: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 58%, var(--brand-3) 100%);
+
+  --bg: #f4f2fb;
+  --surface: #ffffff;
+  --surface-2: #f7f6fc;
+  --surface-3: #efedf8;
+  --hover: rgba(91, 61, 245, 0.06);
+  --border: #e7e4f2;
+  --border-strong: #d6d1ea;
+
+  --text: #17142b;
+  --text-2: #57526f;
+  --text-3: #8f8aa6;
+  --text-on-brand: #ffffff;
+
+  --primary: #5b3df5;
+  --primary-hover: #4a2ee0;
+  --primary-soft: #efebff;
+  --primary-soft-text: #4a2ee0;
+  --like: #f43f6e;
+  --like-soft: #ffe8ef;
+  --success: #12a150;
+  --success-soft: #e3f8ec;
+  --danger: #e5484d;
+  --danger-soft: #ffebec;
+  --online: #22c55e;
+
+  --bubble-me: var(--brand-1);
+  --bubble-me-text: #ffffff;
+  --bubble-them: #efedf8;
+  --bubble-them-text: var(--text);
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(23, 20, 43, 0.06);
+  --shadow: 0 1px 2px rgba(23, 20, 43, 0.04), 0 4px 16px rgba(23, 20, 43, 0.06);
+  --shadow-lg: 0 12px 40px rgba(23, 20, 43, 0.16);
+  --ring: 0 0 0 3px rgba(91, 61, 245, 0.25);
+
+  --nav-h: 64px;
+  --tab-h: 62px;
+
+  color-scheme: light;
+}
+
+@mixin dark {
+  --bg: #0d0b16;
+  --surface: #17142a;
+  --surface-2: #1d1934;
+  --surface-3: #25203f;
+  --hover: rgba(160, 140, 255, 0.08);
+  --border: #2a2545;
+  --border-strong: #3a3460;
+
+  --text: #f3f1fb;
+  --text-2: #b9b3d3;
+  --text-3: #817b9f;
+
+  --primary: #8b74ff;
+  --primary-hover: #a08dff;
+  --primary-soft: #2a2152;
+  --primary-soft-text: #c3b7ff;
+  --like: #ff5d8f;
+  --like-soft: #3b1a2a;
+  --success: #34d399;
+  --success-soft: #11291f;
+  --danger: #ff6b6f;
+  --danger-soft: #3a1618;
+
+  --bubble-me: #6c50ff;
+  --bubble-them: #25203f;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --ring: 0 0 0 3px rgba(139, 116, 255, 0.35);
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include dark;
+}
